@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Backhaul Optimizer | Dispatcher</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI Innovation Challenge · Digital twin MVP</p>
+        <h1>Autonomous Backhaul Optimizer</h1>
+      </div>
+      <div class="header-actions">
+        <span id="google-status" class="chip muted">Checking traffic adapter…</span>
+        <button class="secondary" id="simulate-button">Advance IoT simulation</button>
+        <button class="primary" id="refresh-button">Refresh</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="metric-grid" class="metric-grid" aria-label="Operating metrics"></section>
+
+      <section class="main-grid">
+        <aside class="panel fleet-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Verified fleet state</p>
+              <h2>Vehicles</h2>
+            </div>
+            <span id="fleet-count" class="count"></span>
+          </div>
+          <div id="fleet-list" class="scroll-list"></div>
+        </aside>
+
+        <section class="panel map-panel">
+          <div class="panel-heading map-heading">
+            <div>
+              <p class="eyebrow">Proposed operational corridor</p>
+              <h2 id="map-title">Java logistics network</h2>
+            </div>
+            <div id="selection-label" class="selection-label">Select a recommendation</div>
+          </div>
+          <div id="map" role="application" aria-label="Fleet and proposed backhaul route map"></div>
+          <p class="map-note">Map geometry is the demo’s local planning baseline. Google live traffic is requested only when a dispatcher clicks “Check live traffic.”</p>
+        </section>
+
+        <aside class="panel recommendations-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Ranked by feasible margin</p>
+              <h2>Backhaul recommendations</h2>
+            </div>
+            <span id="recommendation-count" class="count"></span>
+          </div>
+          <div id="recommendation-list" class="scroll-list"></div>
+        </aside>
+      </section>
+
+      <section class="detail-grid">
+        <article class="panel detail-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Decision support</p>
+              <h2>Recommendation detail</h2>
+            </div>
+            <span id="detail-status" class="chip muted">No selection</span>
+          </div>
+          <div id="recommendation-detail" class="empty-state">Select a recommendation to inspect cargo, route, ETA, cost, margin, and confidence.</div>
+        </article>
+
+        <article class="panel audit-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Safety boundary</p>
+              <h2>Data trust &amp; operational rules</h2>
+            </div>
+          </div>
+          <ul class="rule-list">
+            <li>Declared manifest identifies cargo; the model never invents cargo identity from GPS.</li>
+            <li>Telemetry must have a monotonic sequence and a valid device HMAC signature.</li>
+            <li>Off-route movement triggers re-planning before it is classified as a suspicious journey.</li>
+            <li>Dispatcher acceptance is required before cargo is assigned to a vehicle.</li>
+          </ul>
+          <div id="traffic-result" class="traffic-result">Choose a recommendation, then request a one-time live traffic confirmation.</div>
+        </article>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

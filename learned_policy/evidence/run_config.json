@@ -1,0 +1,37 @@
+{
+  "arguments": {
+    "batch_size": 256,
+    "d_model": 192,
+    "eval_batches": 12,
+    "eval_every": 400,
+    "layers": 4,
+    "learning_rate": 0.0003,
+    "max_hours": 4.0,
+    "output": "artifacts",
+    "patience": 10,
+    "seed": 20260825,
+    "steps": 6000,
+    "warmup_steps": 400,
+    "weight_decay": 0.01
+  },
+  "config": {
+    "d_model": 192,
+    "dropout": 0.08,
+    "layers": 4,
+    "max_orders": 32,
+    "max_trucks": 16,
+    "order_dim": 24,
+    "pair_dim": 16,
+    "truck_dim": 32
+  },
+  "cuda": "11.6",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "gpu_memory_bytes": 85198045184,
+  "parameter_count": 4393161,
+  "python": "3.10.4",
+  "random_initialization": true,
+  "seed": 20260825,
+  "started_unix": 1787598443.2438495,
+  "synthetic_digital_twin_only": true,
+  "torch": "1.13.1+cu116"
+}

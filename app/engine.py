@@ -5,11 +5,12 @@ import hashlib
 import hmac
 import json
 import math
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from .config import Settings
 from .store import Repository
+from .weather_context import WeatherContext
 
 
 HUBS = {
@@ -292,11 +293,55 @@ def rupiah(amount: float) -> int:
 
 def canonical_telemetry(payload: dict[str, Any]) -> bytes:
     material = {key: value for key, value in payload.items() if key != "signature"}
-    return json.dumps(material, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    return json.dumps(material, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
 def sign_telemetry(payload: dict[str, Any], secret: str) -> str:
     return hmac.new(secret.encode("utf-8"), canonical_telemetry(payload), hashlib.sha256).hexdigest()
+
+
+def synthetic_gateway_snapshot(truck: dict[str, Any], sample_index: int) -> dict[str, Any]:
+    """Produce labelled demo sensor fields with plausible ranges, never real telemetry."""
+    load_kg = (truck.get("current_job") or {}).get("load_kg")
+    if load_kg is None:
+        load_kg = round(float(truck["capacity_kg"]) * (0.45 + (sample_index % 22) / 100)) if truck["cargo_status"] == "loaded" else 0
+    speed = float(truck.get("speed_kph", 0))
+    return {
+        "device_id": f"sim-gw-{str(truck['id']).lower()}",
+        "cargo_weight_kg": float(load_kg),
+        "can": {
+            "engine_rpm": round(680 + speed * 38, 1),
+            "coolant_temp_c": round(82 + (sample_index % 9) * 0.7, 1),
+            "odometer_km": round(15000 + sample_index * 137.4, 1),
+        },
+        "imu": {
+            "accel_x_g": round(((sample_index % 7) - 3) * 0.07, 3),
+            "gyro_z_dps": round(((sample_index % 9) - 4) * 0.8, 2),
+        },
+        "health": {
+            "power_v": round(12.2 + (sample_index % 5) * 0.08, 2),
+            "signal_dbm": -68 - sample_index % 30,
+            "uptime_s": 7200 + sample_index * 61,
+        },
+    }
+
+
+def normalized_sensor_map(payload: dict[str, Any], key: str) -> dict[str, float] | None:
+    """Validate optional CAN, IMU, and device-health numeric readings."""
+    value = payload.get(key)
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError(f"{key} must be an object of numeric readings")
+    normalized: dict[str, float] = {}
+    for name, reading in value.items():
+        if not isinstance(name, str) or not name:
+            raise ValueError(f"{key} reading names must be non-empty strings")
+        number = float(reading)
+        if not math.isfinite(number):
+            raise ValueError(f"{key}.{name} must be finite")
+        normalized[name] = round(number, 3)
+    return normalized
 
 
 def point_to_segment_km(point: dict[str, Any], start: dict[str, Any], end: dict[str, Any]) -> float:
@@ -328,6 +373,7 @@ class Optimizer:
     def __init__(self, settings: Settings, repository: Repository) -> None:
         self.settings = settings
         self.repository = repository
+        self.weather_context = WeatherContext(settings.data_dir / "context" / "weather-indonesia.json")
         self.fleet = copy.deepcopy([*FLEET_SEED, *national_fleet_seed()])
         self.orders = copy.deepcopy(ORDER_SEED)
         self.rejected_recommendations: set[str] = set()
@@ -383,14 +429,19 @@ class Optimizer:
         job = truck.get("current_job")
         if not job:
             return {"p50_min": 0, "p90_min": 0, "destination": truck["position"]["name"], "source": "at hub"}
-        p50 = int(job["remaining_min"])
+        weather = self.weather_context.for_position(truck["position"])
+        weather_factor = float(weather["eta_factor"]) if weather else 1.0
+        p50 = math.ceil(int(job["remaining_min"]) * weather_factor)
         reliability_penalty = 1.28 + max(0, truck["gps_accuracy_m"] - 15) / 100
-        return {
+        result = {
             "p50_min": p50,
             "p90_min": math.ceil(p50 * reliability_penalty),
             "destination": job["destination"],
-            "source": "offline operating baseline",
+            "source": "offline operating baseline" if not weather else "operating baseline + cached public weather",
         }
+        if weather:
+            result["weather_context"] = weather
+        return result
 
     def traffic_state(self, truck: dict[str, Any]) -> dict[str, Any]:
         """Traffic band inferred from verified fleet speed, not from a route provider's data."""
@@ -583,6 +634,29 @@ class Optimizer:
         if float(payload.get("speed_kph", 0)) > 110:
             signals.append("truck speed exceeds 110 km/h")
             score += 0.43
+        cargo_weight = payload.get("cargo_weight_kg")
+        if cargo_weight is not None and float(cargo_weight) > float(truck["capacity_kg"]):
+            signals.append("cargo sensor reading exceeds vehicle capacity")
+            score += 0.56
+        health = payload.get("health") if isinstance(payload.get("health"), dict) else {}
+        if float(health.get("signal_dbm", -80)) < -110:
+            signals.append("weak gateway cellular signal")
+            score += 0.14
+        if float(health.get("power_v", 12.0)) < 10.5:
+            signals.append("low IoT gateway power")
+            score += 0.16
+        if float(health.get("battery_pct", 100)) < 10:
+            signals.append("low IoT gateway battery")
+            score += 0.16
+        can = payload.get("can") if isinstance(payload.get("can"), dict) else {}
+        if float(can.get("coolant_temp_c", 0)) > 110:
+            signals.append("CAN coolant temperature is unusually high")
+            score += 0.18
+        imu = payload.get("imu") if isinstance(payload.get("imu"), dict) else {}
+        peak_acceleration = max((abs(float(value)) for name, value in imu.items() if "accel" in name.lower()), default=0.0)
+        if peak_acceleration > 2.5:
+            signals.append("IMU detected harsh acceleration or braking")
+            score += 0.16
         active = truck.get("active_plan")
         if active:
             deviation = distance_to_corridor_km(payload, active["geometry"])
@@ -621,8 +695,36 @@ class Optimizer:
         try:
             sequence = int(payload["sequence"])
             lat, lon = float(payload["lat"]), float(payload["lon"])
+            speed, heading = float(payload["speed_kph"]), float(payload["heading"])
+            gps_accuracy, fuel_pct = float(payload["gps_accuracy_m"]), float(payload["fuel_pct"])
             if not (-11.5 <= lat <= 6.5 and 94 <= lon <= 142):
                 raise ValueError("outside Indonesian operating area")
+            if not all(math.isfinite(value) for value in (lat, lon, speed, heading, gps_accuracy, fuel_pct)):
+                raise ValueError("telemetry readings must be finite")
+            if not (0 <= speed <= 130):
+                raise ValueError("speed_kph must be between 0 and 130")
+            if not (0 <= heading <= 360):
+                raise ValueError("heading must be between 0 and 360")
+            if not (0 <= gps_accuracy <= 1000):
+                raise ValueError("gps_accuracy_m must be between 0 and 1000")
+            if not (0 <= fuel_pct <= 100):
+                raise ValueError("fuel_pct must be between 0 and 100")
+            observed_at = datetime.fromisoformat(str(payload["timestamp"]).replace("Z", "+00:00"))
+            if observed_at.tzinfo is None:
+                raise ValueError("timestamp must include a timezone")
+            if observed_at > datetime.now(UTC).replace(microsecond=0) + timedelta(minutes=10):
+                raise ValueError("timestamp is more than ten minutes in the future")
+            device_id = payload.get("device_id")
+            if device_id is not None and (not isinstance(device_id, str) or not device_id.strip() or len(device_id) > 128):
+                raise ValueError("device_id must be a non-empty string up to 128 characters")
+            cargo_weight = payload.get("cargo_weight_kg")
+            if cargo_weight is not None:
+                cargo_weight = float(cargo_weight)
+                if not math.isfinite(cargo_weight) or not (0 <= cargo_weight <= 100000):
+                    raise ValueError("cargo_weight_kg must be between 0 and 100000")
+            can = normalized_sensor_map(payload, "can")
+            imu = normalized_sensor_map(payload, "imu")
+            health = normalized_sensor_map(payload, "health")
         except (TypeError, ValueError) as error:
             self.repository.log_telemetry(truck_id, False, str(error), payload)
             return {"accepted": False, "reason": str(error)}, 400
@@ -633,24 +735,31 @@ class Optimizer:
         truck.update(
             {
                 "position": {"lat": lat, "lon": lon, "name": truck["position"].get("name", "live GPS")},
-                "speed_kph": round(float(payload["speed_kph"]), 1),
-                "heading": round(float(payload["heading"]), 1),
-                "gps_accuracy_m": round(float(payload["gps_accuracy_m"]), 1),
+                "speed_kph": round(speed, 1),
+                "heading": round(heading, 1),
+                "gps_accuracy_m": round(gps_accuracy, 1),
                 "cargo_status": str(payload["cargo_status"]),
-                "fuel_pct": round(float(payload["fuel_pct"]), 1),
+                "fuel_pct": round(fuel_pct, 1),
                 "sequence": sequence,
                 "last_seen": str(payload["timestamp"]),
+                "device_id": device_id or truck.get("device_id"),
+                "cargo_weight_kg": round(cargo_weight, 1) if cargo_weight is not None else truck.get("cargo_weight_kg"),
+                "can": can if can is not None else truck.get("can"),
+                "imu": imu if imu is not None else truck.get("imu"),
+                "device_health": health if health is not None else truck.get("device_health"),
+                "telemetry_source": str(payload.get("source", "direct_http")),
+                "telemetry_replayed": datetime.now(UTC) - observed_at > timedelta(minutes=2),
             }
         )
         anomaly = self._anomaly(truck, payload)
         self.last_anomalies[truck_id] = anomaly
         self.repository.log_telemetry(truck_id, True, anomaly["status"], payload)
-        return {"accepted": True, "truck_id": truck_id, "anomaly": anomaly}, 202
+        return {"accepted": True, "truck_id": truck_id, "anomaly": anomaly, "replayed": truck["telemetry_replayed"]}, 202
 
     def simulator_tick(self) -> list[dict[str, Any]]:
         """Move demo vehicles a small amount and submit genuine HMAC-signed telemetry."""
         results = []
-        for truck in self.fleet:
+        for sample_index, truck in enumerate(self.fleet, start=1):
             target = None
             if truck.get("active_plan"):
                 stops = truck["active_plan"]["stops"]
@@ -684,7 +793,9 @@ class Optimizer:
                 "cargo_status": truck["cargo_status"],
                 "fuel_pct": round(truck["fuel_pct"], 1),
                 "sequence": int(truck.get("sequence", 0)) + 1,
+                "source": "synthetic_digital_twin_simulator",
             }
+            payload.update(synthetic_gateway_snapshot(truck, sample_index))
             payload["signature"] = sign_telemetry(payload, self.settings.iot_shared_secret)
             result, _ = self.process_telemetry(payload)
             results.append(result)

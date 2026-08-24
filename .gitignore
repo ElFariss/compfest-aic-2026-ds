@@ -5,3 +5,15 @@ __pycache__/
 .pytest_cache/
 data/*.sqlite3
 data/*.sqlite3-*
+data/context/
+.ipynb_checkpoints/
+learned_policy/artifacts/
+**/best_checkpoint.pt
+*.tex
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.xdv

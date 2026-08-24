@@ -1,0 +1,34 @@
+{
+  "artifact": {
+    "max_abs_parity_difference": 0.0,
+    "path": "backhaul_policy_frozen.pt",
+    "sha256": "c33c4a83ac3a6925cc9634ecf6d29fb929427918ed70440cf8560beb3527b733",
+    "size_bytes": 17609009
+  },
+  "feature_dimensions": {
+    "order": 24,
+    "pair": 16,
+    "truck": 32
+  },
+  "metrics_file": "metrics.json",
+  "model_name": "constraint-conditioned-backhaul-graph-policy",
+  "model_type": "heterogeneous_graph_policy",
+  "model_version": "2026.08.25-a100",
+  "runtime": {
+    "hard_constraints_external": true,
+    "human_acceptance_required": true,
+    "max_orders": 32,
+    "max_trucks": 16,
+    "weights_static": true
+  },
+  "schema_version": "haulio.backhaul-policy-manifest.v1",
+  "training": {
+    "automatic_tuning": false,
+    "best_step": 4000,
+    "data": "synthetic Indonesia-style digital twin",
+    "initialization": "random",
+    "online_learning": false,
+    "real_world_validation": false,
+    "seed": 20260825
+  }
+}

@@ -17,11 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app.config import get_settings  # noqa: E402
-from app.engine import FLEET_SEED, NATIONAL_FLEET_TOTAL, national_fleet_seed  # noqa: E402
+from app.engine import FLEET_SEED, NATIONAL_FLEET_TOTAL, national_fleet_seed, synthetic_gateway_snapshot  # noqa: E402
 from app.store import Repository  # noqa: E402
 
 
-SEED_ID = "synthetic-indonesia-operations-v3"
+SEED_ID = "synthetic-indonesia-operations-v4-iot-sensors"
 
 
 def timestamp(value: datetime) -> str:
@@ -42,7 +42,6 @@ def build_events(now: datetime) -> tuple[list[dict[str, Any]], list[dict[str, An
             accepted.append(
                 {
                     "truck_id": truck["id"],
-                    "device_id": f"gps-demo-{truck['id'].lower()}",
                     "timestamp": timestamp(now - timedelta(minutes=7 * (truck_index * 2 + sample_index))),
                     "lat": round(truck["position"]["lat"] + math.sin(truck_index + sample_index) * 0.004, 6),
                     "lon": round(truck["position"]["lon"] + math.cos(truck_index + sample_index) * 0.004, 6),
@@ -55,6 +54,7 @@ def build_events(now: datetime) -> tuple[list[dict[str, Any]], list[dict[str, An
                     "source": "synthetic_hackathon_seed",
                     "seed_id": SEED_ID,
                     "scenario_note": "Synthetic 300-truck Indonesia digital-twin history; not real fleet telemetry",
+                    **synthetic_gateway_snapshot(truck, truck_index * 2 + sample_index),
                 }
             )
 

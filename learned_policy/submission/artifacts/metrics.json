@@ -1,0 +1,33 @@
+{
+  "best_step": 4000,
+  "elapsed_seconds": 360.41169361025095,
+  "final_step": 6000,
+  "frozen_artifact": {
+    "max_abs_parity_difference": 0.0,
+    "path": "backhaul_policy_frozen.pt",
+    "sha256": "c33c4a83ac3a6925cc9634ecf6d29fb929427918ed70440cf8560beb3527b733",
+    "size_bytes": 17609009
+  },
+  "sensor_dropout_stress": {
+    "baseline_reward_mean": 0.6763884425163269,
+    "duplicate_assignments": 0.0,
+    "gpu_inference_ms_per_snapshot": 0.11108960413063564,
+    "hard_constraint_violations": 0.0,
+    "learned_reward_mean": 0.7381343841552734,
+    "learned_vs_baseline": 0.06174594163894653,
+    "teacher_action_agreement": 0.9816921353340149,
+    "teacher_gap_normalized": 0.1848415583372116,
+    "teacher_reward_mean": 0.7534704804420471
+  },
+  "validation": {
+    "baseline_reward_mean": 1.666116714477539,
+    "duplicate_assignments": 0.0,
+    "gpu_inference_ms_per_snapshot": 0.13087581319268793,
+    "hard_constraint_violations": 0.0,
+    "learned_reward_mean": 1.7767702341079712,
+    "learned_vs_baseline": 0.11065351963043213,
+    "teacher_action_agreement": 0.9619882702827454,
+    "teacher_gap_normalized": 0.25500181317329407,
+    "teacher_reward_mean": 1.817820429801941
+  }
+}

@@ -25,6 +25,7 @@ class OptimizerTests(unittest.TestCase):
         self.optimizer = Optimizer(settings, Repository(data_dir / "test.sqlite3"))
 
     def tearDown(self) -> None:
+        self.optimizer.repository.close()
         self.temporary.cleanup()
 
     def test_matching_includes_feasible_multi_hop(self) -> None:
@@ -34,6 +35,13 @@ class OptimizerTests(unittest.TestCase):
         self.assertEqual(plan["order_ids"], ["ORD-101", "ORD-102"])
         self.assertGreater(plan["expected_margin_idr"], 0)
         self.assertLessEqual(plan["capacity_used_kg"], 12000)
+
+    def test_national_demo_fleet_has_300_visible_trucks_without_extra_matches(self) -> None:
+        fleet = self.optimizer.fleet_view()
+        plans = self.optimizer.recommendations()
+        self.assertEqual(len(fleet), 300)
+        self.assertEqual(sum(truck["id"].startswith("TRK-NAT-") for truck in fleet), 296)
+        self.assertFalse(any(plan["truck_id"].startswith("TRK-NAT-") for plan in plans))
 
     def test_dispatcher_acceptance_locks_truck_and_orders(self) -> None:
         plan = next(plan for plan in self.optimizer.recommendations() if plan["id"] == "REC-TRK-01-101-102")

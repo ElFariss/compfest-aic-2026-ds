@@ -4,7 +4,7 @@ A local, dependency-free MVP for the AI Innovation Challenge problem: identify i
 
 The demo is intentionally honest about its evidence boundary:
 
-- The Java map points and marketplace orders are a **synthetic digital-twin scenario**.
+- The 300-truck Indonesia activity map and marketplace orders are a **synthetic digital-twin scenario**. Only four Java vehicles are matching candidates; the other 296 make national activity visible without fabricating dispatcher work.
 - The risk, ETA, price, and anomaly values are explainable **baseline heuristics**, not models trained on a claimed proprietary fleet dataset.
 - Google traffic is an on-demand dispatcher confirmation. Its result is not persisted or used to train, test, or tune a model.
 
@@ -20,20 +20,37 @@ python3 run.py
 
 Open [http://127.0.0.1:8080](http://127.0.0.1:8080). The server deliberately binds to loopback by default, so the unauthenticated MVP cannot be reached from the network.
 
-For the current split, map-first interface, launch the sibling backend instead:
+For the current split, map-first interface, launch the API and Next.js client
+in separate terminals:
 
 ```bash
 cd ../compfest-aic-2026-be
 python3 run.py
+
+cd ../compfest-aic-2026-fe
+npm run dev
 ```
 
-It serves the dedicated `compfest-aic-2026-fe` client while retaining this directory as the model/data-science source of truth.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000). Next.js proxies
+`/api/v1/*` to the loopback API on port 8080, while this directory remains the
+model/data-science source of truth. The client never receives
+`GOOGLE_MAP_API`.
 
 Run the checks with:
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+Seed a richer, clearly synthetic Indonesia operations history for the demo map
+and audit metrics:
+
+```bash
+python3 scripts/seed_demo_db.py
+```
+
+The seed is idempotent and writes only labelled synthetic historical telemetry
+to the ignored local SQLite database.
 
 ## Environment
 

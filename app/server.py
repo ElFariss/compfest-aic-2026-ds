@@ -33,6 +33,13 @@ class RequestHandler(BaseHTTPRequestHandler):
     server: AppServer
     protocol_version = "HTTP/1.1"
 
+    def handle(self) -> None:
+        """Ignore a client disconnect before a complete HTTP request is received."""
+        try:
+            super().handle()
+        except (BrokenPipeError, ConnectionResetError):
+            return
+
     def log_message(self, format: str, *args: object) -> None:
         # Retain useful local request logging without ever printing request bodies.
         print(f"[{self.log_date_time_string()}] {self.address_string()} {format % args}")

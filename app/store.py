@@ -32,8 +32,18 @@ class Repository:
                     action TEXT NOT NULL,
                     note TEXT
                 );
+                CREATE TABLE IF NOT EXISTS demo_seed_runs (
+                    seed_id TEXT PRIMARY KEY,
+                    seeded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    event_count INTEGER NOT NULL
+                );
                 """
             )
+
+    def close(self) -> None:
+        """Release the local SQLite connection for clean test and server shutdown."""
+        with self._lock:
+            self._connection.close()
 
     def log_telemetry(self, truck_id: str | None, accepted: bool, reason: str, payload: dict[str, Any]) -> None:
         with self._lock, self._connection:
@@ -67,3 +77,27 @@ class Repository:
                 (limit,),
             ).fetchall()
         return [json.loads(row["payload_json"]) for row in rows]
+
+    def seed_telemetry(self, seed_id: str, accepted_events: list[dict[str, Any]], rejected_events: list[dict[str, Any]]) -> int:
+        """Insert an idempotent, clearly labelled synthetic historical scenario."""
+        with self._lock, self._connection:
+            existing = self._connection.execute("SELECT 1 FROM demo_seed_runs WHERE seed_id = ?", (seed_id,)).fetchone()
+            if existing:
+                return 0
+            rows = [
+                (payload.get("truck_id"), 1, "synthetic historical seed", json.dumps(payload, separators=(",", ":")))
+                for payload in accepted_events
+            ]
+            rows.extend(
+                (payload.get("truck_id"), 0, "synthetic rejected seed event", json.dumps(payload, separators=(",", ":")))
+                for payload in rejected_events
+            )
+            self._connection.executemany(
+                "INSERT INTO telemetry_events (truck_id, accepted, reason, payload_json) VALUES (?, ?, ?, ?)",
+                rows,
+            )
+            self._connection.execute(
+                "INSERT INTO demo_seed_runs (seed_id, event_count) VALUES (?, ?)",
+                (seed_id, len(rows)),
+            )
+        return len(rows)

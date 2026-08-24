@@ -90,6 +90,94 @@ FLEET_SEED = [
 ]
 
 
+# These are province-level operating centres for a clearly labelled synthetic
+# national digital twin. They are deliberately not customer, driver, or depot
+# locations. Four Java trucks above remain the dispatcher-matching scenario;
+# the generated vehicles make the activity map look like an Indonesia-wide
+# operating network without producing hundreds of artificial recommendations.
+NATIONAL_FLEET_CENTRES = [
+    ("Aceh", 4.70, 96.80),
+    ("North Sumatra", 2.40, 99.50),
+    ("West Sumatra", -0.70, 100.40),
+    ("Riau", 0.40, 101.50),
+    ("Jambi", -1.60, 103.60),
+    ("South Sumatra", -3.10, 104.10),
+    ("Bengkulu", -3.80, 102.30),
+    ("Lampung", -4.80, 105.20),
+    ("Bangka Belitung", -2.70, 106.50),
+    ("Riau Islands", 1.1532, 104.1215),
+    ("Jakarta", -6.20, 106.82),
+    ("West Java", -6.80, 107.60),
+    ("Central Java", -7.10, 110.30),
+    ("Yogyakarta", -7.80, 110.40),
+    ("East Java", -7.70, 112.40),
+    ("Banten", -6.20, 106.10),
+    ("Bali", -8.40, 115.20),
+    ("West Nusa Tenggara", -8.60, 117.40),
+    ("East Nusa Tenggara", -10.8462, 123.0001),
+    ("West Kalimantan", -0.10, 111.50),
+    ("Central Kalimantan", -1.80, 113.40),
+    ("South Kalimantan", -3.10, 115.10),
+    ("East Kalimantan", 0.50, 116.80),
+    ("North Kalimantan", 3.30, 116.20),
+    ("North Sulawesi", 1.20, 124.70),
+    ("Central Sulawesi", -1.10, 121.60),
+    ("South Sulawesi", -3.80, 119.70),
+    ("Southeast Sulawesi", -4.10, 122.10),
+    ("Gorontalo", 0.70, 122.40),
+    ("West Sulawesi", -2.60, 119.30),
+    ("Maluku", -3.70, 128.20),
+    ("North Maluku", -2.2210, 125.9752),
+    ("Papua", -3.6107, 139.6610),
+    ("West Papua", -4.1499, 134.8135),
+    ("South Papua", -7.50, 139.50),
+    ("Central Papua", -3.60, 137.20),
+    ("Highland Papua", -4.00, 139.50),
+    ("Southwest Papua", -0.90, 131.30),
+]
+NATIONAL_FLEET_TOTAL = 300
+COMPACT_PROVINCE_SPREAD = {"East Nusa Tenggara", "North Maluku", "Southwest Papua"}
+
+
+def national_fleet_seed() -> list[dict[str, Any]]:
+    """Return 296 deterministic, synthetic trucks distributed across Indonesia."""
+    if len(NATIONAL_FLEET_CENTRES) != 38:
+        raise RuntimeError("Synthetic national fleet requires all 38 province centres")
+
+    vehicle_profiles = (("box", 6000), ("box", 10000), ("flatbed", 16000), ("reefer", 8000), ("wingbox", 12000))
+    fleet: list[dict[str, Any]] = []
+    for index in range(NATIONAL_FLEET_TOTAL - len(FLEET_SEED)):
+        province, latitude, longitude = NATIONAL_FLEET_CENTRES[index % len(NATIONAL_FLEET_CENTRES)]
+        vehicle_type, capacity_kg = vehicle_profiles[index % len(vehicle_profiles)]
+        state = index % 6
+        status = "available" if state == 0 else "awaiting_backhaul" if state == 1 else "en_route"
+        spread = 0.004 if province in COMPACT_PROVINCE_SPREAD else 0.018
+        fleet.append(
+            {
+                "id": f"TRK-NAT-{index + 1:03d}",
+                "name": f"Nusantara Relay {province} {index // len(NATIONAL_FLEET_CENTRES) + 1}",
+                "vehicle_type": vehicle_type,
+                "capacity_kg": capacity_kg,
+                "position": {
+                    "lat": round(latitude + math.sin((index + 1) * 1.7) * spread, 6),
+                    "lon": round(longitude + math.cos((index + 1) * 1.3) * spread, 6),
+                    "name": f"Synthetic {province} operating area",
+                },
+                "status": status,
+                "fuel_pct": 36 + (index * 11) % 59,
+                "speed_kph": 0 if status != "en_route" else 16 + (index * 13) % 56,
+                "heading": (index * 29) % 360,
+                "gps_accuracy_m": 6 + index % 9,
+                "cargo_status": "loaded" if status == "en_route" else "empty",
+                "current_job": None,
+                "sequence": 1000 + index,
+                "active_plan": None,
+                "eligible_for_matching": False,
+            }
+        )
+    return fleet
+
+
 ORDER_SEED = [
     {
         "id": "ORD-101",
@@ -240,7 +328,7 @@ class Optimizer:
     def __init__(self, settings: Settings, repository: Repository) -> None:
         self.settings = settings
         self.repository = repository
-        self.fleet = copy.deepcopy(FLEET_SEED)
+        self.fleet = copy.deepcopy([*FLEET_SEED, *national_fleet_seed()])
         self.orders = copy.deepcopy(ORDER_SEED)
         self.rejected_recommendations: set[str] = set()
         self.last_anomalies: dict[str, dict[str, Any]] = {}
@@ -399,6 +487,8 @@ class Optimizer:
     def recommendations(self) -> list[dict[str, Any]]:
         plans: list[dict[str, Any]] = []
         for truck in self.fleet:
+            if not truck.get("eligible_for_matching", True):
+                continue
             if truck.get("active_plan"):
                 active = copy.deepcopy(truck["active_plan"])
                 active["status"] = "accepted"
@@ -435,6 +525,7 @@ class Optimizer:
             item["traffic"] = self.traffic_state(truck)
             item["anomaly"] = self.last_anomalies.get(truck["id"], {"status": "normal", "score": 0.02, "signals": []})
             item.pop("active_plan", None)
+            item.pop("eligible_for_matching", None)
             result.append(item)
         return result
 

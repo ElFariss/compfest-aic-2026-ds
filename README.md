@@ -56,6 +56,31 @@ source space, not Haulio business KPIs. Metrics are in
 after validation selected and froze the checkpoint; the metrics ledger records
 the deterministic per-source evaluation cap.
 
+## Model weight and training artifacts
+
+The competition model weight is committed at
+[`real_policy/submission/artifacts/real_backhaul_policy_frozen.pt`](real_policy/submission/artifacts/real_backhaul_policy_frozen.pt).
+It is a CPU-portable, frozen TorchScript artifact and is copied into the
+competition image as `/app/artifacts/real_backhaul_policy_frozen.pt`.
+
+| Item | Location |
+|---|---|
+| Frozen weight | [`real_policy/submission/artifacts/real_backhaul_policy_frozen.pt`](real_policy/submission/artifacts/real_backhaul_policy_frozen.pt) |
+| Weight SHA-256 | `11cb3412afc970a6c8c2a26a8d7f0a07ba2da6ff16c8c6c54d1b8375acd1a1f5` |
+| Weight size | 13,695,583 bytes |
+| Artifact/preprocessing contract | [`real_policy/submission/artifacts/manifest.json`](real_policy/submission/artifacts/manifest.json) |
+| Frozen evaluation metrics | [`real_policy/submission/artifacts/metrics.json`](real_policy/submission/artifacts/metrics.json) |
+| Model source | [`real_policy/backhaul_real/model.py`](real_policy/backhaul_real/model.py) |
+| Training implementation | [`real_policy/training/train_real.py`](real_policy/training/train_real.py) |
+| A100 launcher | [`real_policy/run_a100.sh`](real_policy/run_a100.sh) |
+| Run configuration and history | [`real_policy/evidence/`](real_policy/evidence/) |
+| Executed replay notebook | [`notebooks/real_policy_training_evaluation.ipynb`](notebooks/real_policy_training_evaluation.ipynb) |
+
+`best_checkpoint.pt` and optimizer state are deliberately not shipped. The
+competition deliverable is the immutable inference weight above; the trainer,
+configuration, history, completion record, data hashes, and evaluation evidence
+remain committed for reproducibility.
+
 ## Full model architecture
 
 ```mermaid
@@ -126,6 +151,45 @@ manifest records the hashes of the exact raw files and processed tensors.
 | VIUS 2021 | real truck configuration and annual mile-use survey | 17,340 / 4,073 / 3,335 | annual deadhead prior, not a live empty-return label |
 | Scania APS | 170 real anonymous truck fields plus missing bits | 51,085 / 8,915 / 16,000 | APS-specific; no vehicle/time IDs |
 | NYC TLC Jan 2024 | real chronological passenger trips and metered fare | 100,000 / 20,000 / 20,000 | code-path proxy, never Indonesian freight price/margin |
+
+### Exact acquisition links used
+
+These are the provider objects that entered the frozen checkpoint. Together
+they resolve to 39 checksum-verified raw-lineage files after extracting the
+Singapore archive. Candidate and external-audit datasets are excluded from
+this list.
+
+1. **Amazon Last Mile Routing 2021** — [official landing page](https://registry.opendata.aws/amazon-last-mile-challenges/), CC BY-NC 4.0.
+   The six exact objects are [training routes](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-training/model_build_inputs/route_data.json),
+   [training packages](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-training/model_build_inputs/package_data.json),
+   [training sequences](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-training/model_build_inputs/actual_sequences.json),
+   [evaluation routes](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-evaluation/model_apply_inputs/eval_route_data.json),
+   [evaluation packages](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-evaluation/model_apply_inputs/eval_package_data.json), and
+   [evaluation sequences](https://amazon-last-mile-challenges.s3.us-west-2.amazonaws.com/almrrc2021/almrrc2021-data-evaluation/model_score_inputs/eval_actual_sequences.json).
+2. **LaDe** — [official pinned revision](https://huggingface.co/datasets/Cainiao-AI/LaDe/tree/be2cec02775cafc8d52230303f32134382bcc50b).
+   The two exact files are [delivery_five_cities.csv](https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/delivery_five_cities.csv?download=true)
+   and [pickup_five_cities.csv](https://huggingface.co/datasets/Cainiao-AI/LaDe/resolve/be2cec02775cafc8d52230303f32134382bcc50b/pickup_five_cities.csv?download=true).
+   Review the [dataset terms](https://huggingface.co/datasets/Cainiao-AI/LaDe/blob/be2cec02775cafc8d52230303f32134382bcc50b/README.md): its metadata declares Apache-2.0 while its README also states a research-use caveat.
+3. **Singapore commercial vehicles** — [landing page](https://figshare.com/articles/dataset/Singapore_commercial_vehicle_GPS_OBD_payload_fuel_use_data/9741035),
+   [metadata API](https://api.figshare.com/v2/articles/9741035), and
+   [exact Figshare ZIP, file ID 24337976](https://ndownloader.figshare.com/files/24337976), CC BY 4.0.
+4. **DT-CARGO** — [official Zenodo record](https://zenodo.org/records/16411298) and
+   [source repository](https://github.com/TUMFTM/dt-cargo). The model uses only
+   the pinned [fleet.csv](https://raw.githubusercontent.com/TUMFTM/dt-cargo/805c534c73ed4d247babd053f60468b486f92519/input/public/fleet.csv)
+   and [tracks.csv](https://raw.githubusercontent.com/TUMFTM/dt-cargo/805c534c73ed4d247babd053f60468b486f92519/input/public/tracks.csv), under ODbL 1.0 / Database Contents License. `speed.zip` did not enter this checkpoint.
+5. **VIUS 2021 Public Use File** — [official landing page](https://www.census.gov/data/datasets/2021/econ/vius/2021-vius-puf.html)
+   and [exact CSV ZIP](https://www2.census.gov/programs-surveys/vius/datasets/2021/vius_2021_puf_csv.zip), under U.S. government public-use terms.
+6. **Scania APS Failure** — [official UCI page](https://archive.ics.uci.edu/dataset/421/aps+failure+at+scania+trucks),
+   [exact ZIP](https://archive.ics.uci.edu/static/public/421/aps+failure+at+scania+trucks.zip), and
+   [DOI](https://doi.org/10.24432/C51S51). UCI declares CC BY 4.0; the exact archive also embeds a Scania GPLv3 notice, so both notices must be preserved.
+7. **NYC TLC Yellow Taxi, January 2024** — [official landing page](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page),
+   [exact Parquet](https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet), and
+   [NYC Open Data terms](https://opendata.cityofnewyork.us/overview/#termsofuse).
+
+The exact bytes and SHA-256 digests are in
+[`data_sources/checksums.lock`](data_sources/checksums.lock), while the 39
+consumed raw-lineage paths and processed split hashes are in
+[`real_policy/evidence/data_manifest.json`](real_policy/evidence/data_manifest.json).
 
 Amazon's locked objects contain 6,112 build routes and 3,052 matching official
 evaluation routes (9,164 total), versus 3,072/9,184 described by the publication;

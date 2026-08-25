@@ -20,6 +20,12 @@ orders, dispatcher choice, executed route, and realized margin are aligned for
 the same decision. The model shares parameters across source-specific tasks;
 it never joins unrelated rows into an event that did not happen.
 
+## Related repositories
+
+- Data science (repository ini): https://github.com/ElFariss/compfest-aic-2026-ds
+- Frontend: https://github.com/sulthonaw/haulio-fe
+- Backend: https://github.com/sulthonaw/haulio-be
+
 ## Verified release
 
 | Property | Frozen release |

@@ -214,6 +214,77 @@ promotion, or dispatch side effect. Example payloads are transformed or raw
 held-out public observations with explicit provenance; no Haulio-shaped event
 is fabricated.
 
+## Hackathon local demo: DS + BE + FE
+
+The map demo is composed of three sibling repositories. Run the commands below
+from the directory that contains `compfest-aic-2026-ds`, `haulio-be`, and
+`compfest-aic-2026-fe`. Each repository owns one Compose command; all three
+join the shared `haulio-local-demo` Docker network.
+
+### 1. Optional: configure road-following Google Routes
+
+The DS model does **not** need a Google key. The key is used only by the
+backend to request on-demand, road-following route geometry for the dispatcher
+map and the **Simulate live traffic** demo. It remains server-side and is
+never sent to the frontend/browser.
+
+1. Open the [Google Maps Platform console](https://console.cloud.google.com/google/maps-apis/?pli=1), choose or create a Google Cloud project, and enable **Routes API**.
+2. Create an API key for that project. Restrict it to the Routes API before any non-local deployment.
+3. In the **DS repository root** (not inside `real_policy/submission`), create the ignored file `.env` with this one line:
+
+   ```env
+   GOOGLE_MAP_API=replace_with_your_google_routes_key
+   ```
+
+   The backend Compose file imports `../compfest-aic-2026-ds/.env` at runtime.
+   Do not add this key to a frontend `.env` file and do not commit it. Without a
+   key the rest of the local demo still works, but the map uses its local route
+   fallback instead of Google road-matched alternatives.
+
+### 2. Start the frozen DS inference service
+
+```bash
+cd compfest-aic-2026-ds/real_policy/submission
+COMPOSE_IGNORE_ORPHANS=1 docker compose up --build -d
+curl --fail http://127.0.0.1:8088/health
+```
+
+### 3. Start the backend, PostgreSQL, and MQTT broker
+
+```bash
+cd ../../../haulio-be
+COMPOSE_IGNORE_ORPHANS=1 docker compose up --build -d
+curl --fail http://127.0.0.1:3001/api/v1/health
+```
+
+### 4. Seed the judge/demo fleet
+
+After the backend container is healthy, load the realistic synthetic demo fleet
+(300 trucks with recent telemetry and recommendations):
+
+```bash
+docker compose exec -T postgres psql -v ON_ERROR_STOP=1 -U postgres -d haulio_demo < scripts/seed-demo-data.sql
+```
+
+### 5. Start the frontend
+
+```bash
+cd ../compfest-aic-2026-fe
+COMPOSE_IGNORE_ORPHANS=1 docker compose up --build -d
+curl --fail http://127.0.0.1:3000/
+```
+
+Open `http://127.0.0.1:3000/admin` for the dispatcher dashboard. The frontend
+also listens on port `3000` on the host network, so another device on the same
+LAN can open `http://<host-ip>:3000/admin`. The **Simulate live traffic** button
+advances the seeded telemetry, selects a highlighted truck, and renders its
+primary road-following route plus two grey alternatives when a Google key is
+available.
+
+To stop the demo, run `docker compose down` from each of the three repository
+directories. `COMPOSE_IGNORE_ORPHANS=1` prevents one repository's Compose
+command from treating services owned by the others as stale containers.
+
 ## Validation
 
 ```bash

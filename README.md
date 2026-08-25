@@ -228,7 +228,7 @@ backend to request on-demand, road-following route geometry for the dispatcher
 map and the **Simulate live traffic** demo. It remains server-side and is
 never sent to the frontend/browser.
 
-1. Open the [Google Maps Platform console](https://console.cloud.google.com/google/maps-apis/?pli=1), choose or create a Google Cloud project, and enable **Routes API**.
+1. Open the [Google Maps Platform console](https://console.cloud.google.com/google/maps-apis/onboard;flow=just-ask-flow;step=just_ask?authuser=1), choose or create a Google Cloud project, and enable **Routes API**.
 2. Create an API key for that project. Restrict it to the Routes API before any non-local deployment.
 3. In the **DS repository root** (not inside `real_policy/submission`), create the ignored file `.env` with this one line:
 

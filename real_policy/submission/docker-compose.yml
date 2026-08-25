@@ -1,5 +1,9 @@
+name: haulio-local-demo
+
 services:
-  real-policy:
+  # The shared project name makes this service discoverable by the backend as
+  # http://ds:8088 when each repository is started independently.
+  ds:
     build: .
     ports:
       - "127.0.0.1:8088:8088"

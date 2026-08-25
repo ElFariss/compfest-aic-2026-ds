@@ -222,7 +222,7 @@ is fabricated.
 
 The map demo is composed of three sibling repositories. Run the commands below
 from the directory that contains `compfest-aic-2026-ds`, `haulio-be`, and
-`compfest-aic-2026-fe`. Each repository owns one Compose command; all three
+`haulio-fe`. Each repository owns one Compose command; all three
 join the shared `haulio-local-demo` Docker network.
 
 ### 1. Optional: configure road-following Google Routes
@@ -273,7 +273,7 @@ docker compose exec -T postgres psql -v ON_ERROR_STOP=1 -U postgres -d haulio_de
 ### 5. Start the frontend
 
 ```bash
-cd ../compfest-aic-2026-fe
+cd ../haulio-fe
 COMPOSE_IGNORE_ORPHANS=1 docker compose up --build -d
 curl --fail http://127.0.0.1:3000/
 ```

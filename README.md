@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/haulio-team.png" alt="Haulio — AI Autonomous Backhaul Optimizer, IoT Songgoriti team" width="900" />
+  <img src="docs/haulio-team-2026.png" alt="Haulio — AI Autonomous Backhaul Optimizer, IoT Songgoriti team" width="900" />
 </p>
 
 # RealBackhaulNet — Haulio autonomous backhaul AI

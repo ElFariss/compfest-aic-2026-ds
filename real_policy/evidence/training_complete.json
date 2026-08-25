@@ -1,0 +1,8 @@
+{
+  "artifact_sha256": "11cb3412afc970a6c8c2a26a8d7f0a07ba2da6ff16c8c6c54d1b8375acd1a1f5",
+  "best_step": 800,
+  "completed_unix": 1787645490.5658185,
+  "final_evaluation_capped": true,
+  "status": "complete",
+  "wall_seconds": 2433.1051478385925
+}

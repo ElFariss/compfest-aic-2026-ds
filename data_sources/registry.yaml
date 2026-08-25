@@ -1,0 +1,582 @@
+schema_version: "1.0"
+last_verified_utc: "2026-08-25T00:00:00Z"
+
+governance:
+  purpose: >-
+    Train and evaluate a cross-domain backhaul-policy prototype using only
+    observed public records and explicitly documented derived labels.
+  raw_directory: "data_sources/raw"
+  raw_git_policy: "ignored"
+  synthetic_feature_rows: "prohibited"
+  cross_source_record_joins: "prohibited"
+  same_source_grouping: >-
+    Allowed only when the source itself provides the operational cohort key,
+    such as Amazon station and service date.
+  source_batching: >-
+    Each training minibatch belongs to exactly one source. Dataset-specific
+    task masks activate only labels observed or derived within that source.
+  required_per_sample_fields:
+    - source_id
+    - sample_id
+    - split_group_or_route_group
+  required_per_split_manifest_fields:
+    - processed_sha256
+    - row_count
+    - sample_id_order_sha256
+    - group_set_sha256
+  required_per_source_manifest_fields:
+    - raw_artifact_id
+    - raw_sha256
+    - observed_and_derived_target_description
+  permitted_label_origins:
+    - observed
+    - same_source_derived
+    - same_source_solver_derived
+  permitted_usage_status:
+    - core_training
+    - external_audit_only
+    - candidate_not_used_by_current_model
+  prohibited_claims:
+    - "Field-validated Haulio performance"
+    - "Causal empty-kilometre reduction"
+    - "Calibrated Indonesian truckload price"
+    - "Learned device authentication"
+    - "One joined public end-to-end Haulio validation set"
+
+sources:
+  singapore_commercial_vehicle:
+    usage_status: "core_training"
+    title: "Singapore commercial vehicle GPS, OBD, payload, fuel use data"
+    publisher: "Figshare"
+    citation: >-
+      Cheah, Lynette (2019). Singapore commercial vehicle GPS, OBD, payload,
+      fuel use data. figshare. Dataset.
+      https://doi.org/10.6084/m9.figshare.9741035.v2
+    landing_url: "https://figshare.com/articles/dataset/Singapore_commercial_vehicle_GPS_OBD_payload_fuel_use_data/9741035"
+    metadata_url: "https://api.figshare.com/v2/articles/9741035"
+    download_url: "https://ndownloader.figshare.com/files/24337976"
+    artifact_id: "figshare:24337976"
+    artifact_name: "figshare_TRR.zip"
+    expected_bytes: 46804275
+    license:
+      name: "CC BY 4.0"
+      url: "https://creativecommons.org/licenses/by/4.0/"
+      raw_redistribution: "only under source license with attribution"
+    domain: "commercial road vehicles; six HGV and four LGV in Singapore"
+    observed_inputs:
+      - timestamp_GMTplus8
+      - speed_kmh
+      - engine_status
+      - TripID
+      - road_grade_proportion
+      - engine_load_obd_percent
+      - mass_air_flow_g_per_s
+      - instantaneous_fuel_L_per_s
+      - payload_StartTime_and_EndTime_for_six_vehicles
+      - payload_Pickup_type_and_Pickup_volume_for_six_vehicles
+      - payload_Deliver_type_and_Deliver_volume_for_six_vehicles
+      - trip_level_OBD_Fuel_used_L
+    allowed_labels:
+      - name: "instantaneous_fuel_L_per_s"
+        origin: "same_source_derived_by_publisher_from_OBD_engine_load_and_mass_air_flow"
+      - name: "OBD - Fuel used (L)"
+        origin: "same_source_derived_by_publisher_from_instantaneous_fuel_stream"
+      - name: "future_half_idle_heavy_class"
+        origin: "same_source_derived_from_observed_future_engine_state"
+      - name: "trip_duration"
+        origin: "same_source_derived_from_timestamps"
+      - name: "coarse_load_state_transition"
+        origin: "same_source_derived_from_driver_activity_survey"
+        current_checkpoint: false
+    allowed_tasks:
+      - fuel_prediction
+      - engine_and_idle_state
+      - remaining_trip_duration
+      - coarse_empty_or_loaded_state
+    current_checkpoint_tasks:
+      - first_half_to_full_trip_fuel_prediction
+      - first_half_to_full_trip_duration_prediction
+      - future_half_idle_heavy_classification
+    current_checkpoint_exclusions:
+      - "instantaneous_fuel_L_per_s is excluded from inputs because it is integrated into the fuel target"
+      - "coarse payload survey responses are retained as provenance only; no load target or load-state prediction is trained"
+    gaps:
+      - "Latitude and longitude are intentionally removed."
+      - "Payload answers are coarse categories, not load-cell kilograms."
+      - "Vehicles A, E, F, and H have no payload survey."
+      - "The initial onboard load is unknown, and free-text volume units are inconsistent."
+      - "Fuel fields are publisher calculations from OBD signals, not a calibrated fuel-flow meter."
+      - "At least five working days per vehicle is too small for deployment calibration."
+
+  dt_cargo_v2:
+    usage_status: "core_training"
+    title: "Dataset of Trucks' Anonymized Recorded Driving and Operation"
+    publisher: "Technical University of Munich / Zenodo"
+    citation_doi: "10.5281/zenodo.16411298"
+    landing_url: "https://zenodo.org/records/16411298"
+    source_release_url: "https://zenodo.org/records/16411298"
+    code_and_lightweight_data_url: "https://github.com/TUMFTM/dt-cargo"
+    pinned_revision: "805c534c73ed4d247babd053f60468b486f92519"
+    download_urls:
+      fleet: "https://raw.githubusercontent.com/TUMFTM/dt-cargo/805c534c73ed4d247babd053f60468b486f92519/input/public/fleet.csv"
+      tracks: "https://raw.githubusercontent.com/TUMFTM/dt-cargo/805c534c73ed4d247babd053f60468b486f92519/input/public/tracks.csv"
+      example_speed: "https://raw.githubusercontent.com/TUMFTM/dt-cargo/805c534c73ed4d247babd053f60468b486f92519/input/public/speed.zip"
+    artifact_id: "github:TUMFTM/dt-cargo@805c534c73ed4d247babd053f60468b486f92519:input/public"
+    artifact_name: "lightweight-public-files"
+    expected_bytes: 16423511
+    license:
+      name: "ODbL 1.0 / Database Contents License"
+      url: "https://opendatacommons.org/licenses/odbl/1-0/"
+      raw_redistribution: "follow ODbL attribution and share-alike obligations"
+    domain: >-
+      Provider publication: 54 class-N3 trucks and 1.26 million km; the locked
+      lightweight tables contain 53 observed vehicle IDs and about 1.269 million km.
+    observed_inputs:
+      - vehicle_GVWR_and_GCWR
+      - axle_class
+      - track_and_tour_identifiers
+      - start_and_stop_timestamps
+      - track_distance
+      - average_and_maximum_speed
+      - signal_loss_counts_and_distance
+      - HDOP
+      - semantic_stop_flags
+      - one_example_10_Hz_speed_and_HDOP_stream
+    allowed_labels:
+      - name: "remaining_track_duration"
+        origin: "same_source_derived_from_observed_timestamps"
+      - name: "signal_loss"
+        origin: "observed"
+      - name: "home_base_long_haul_rest_or_industrial_stop"
+        origin: "observed_published_semantic_flag"
+    allowed_tasks:
+      - heavy_truck_temporal_encoder
+      - duration_prediction
+      - GNSS_data_quality
+      - stop_semantics
+    gaps:
+      - "Coordinates are removed."
+      - "Cargo identity, load state, fuel use, order, revenue, and price are absent."
+      - "The current lightweight training artifact uses track metadata plus one example high-frequency trace, not the 9.7 GB full speed corpus."
+
+  vius_2021_puf:
+    usage_status: "core_training"
+    title: "2021 Vehicle Inventory and Use Survey Public Use File"
+    publisher: "U.S. Census Bureau / BTS / FHWA / DOE"
+    landing_url: "https://www.census.gov/data/datasets/2021/econ/vius/2021-vius-puf.html"
+    download_url: "https://www2.census.gov/programs-surveys/vius/datasets/2021/vius_2021_puf_csv.zip"
+    artifact_id: "census:vius:2021:puf_csv"
+    artifact_name: "vius_2021_puf_csv.zip"
+    expected_bytes: 3528049
+    license:
+      name: "U.S. government public-use microdata"
+      url: "https://www.census.gov/data/datasets/2021/econ/vius/2021-vius-puf.html"
+      raw_redistribution: "follow Census citation and public-use documentation"
+    observed_inputs:
+      - body_type
+      - trailer_and_axle_configuration
+      - average_operating_weight
+      - GVWR_class
+      - fuel_type
+      - MPG
+      - annual_miles
+      - commodities_carried
+    allowed_labels:
+      - name: "DEADHEADPCT"
+        origin: "observed_annual_survey_response"
+      - name: "REPOSITIONPCT"
+        origin: "observed_annual_survey_response"
+      - name: "MPG"
+        origin: "observed_or_imputed_as_flagged_by_source"
+    allowed_tasks:
+      - static_deadhead_prior
+      - vehicle_representation
+      - fuel_economy_prior
+    gaps:
+      - "Deadhead and reposition targets are annual percentages, not trip labels."
+      - "The file has no live truck location, open order book, or tender decision."
+      - "Disclosure protection and source imputation flags must be preserved."
+
+  scania_aps_failure:
+    usage_status: "core_training"
+    title: "APS Failure at Scania Trucks"
+    publisher: "Scania CV AB / UCI Machine Learning Repository"
+    citation_doi: "10.24432/C51S51"
+    landing_url: "https://archive.ics.uci.edu/dataset/421/aps+failure+at+scania+trucks"
+    download_url: "https://archive.ics.uci.edu/static/public/421/aps+failure+at+scania+trucks.zip"
+    artifact_id: "uci:421:aps-failure-at-scania-trucks"
+    artifact_name: "aps+failure+at+scania+trucks.zip"
+    expected_bytes: 56618034
+    license:
+      name: "CC BY 4.0"
+      url: "https://creativecommons.org/licenses/by/4.0/"
+      raw_redistribution: "only under source license with attribution"
+      packaged_notice: >-
+        The exact official ZIP also embeds a Scania GPLv3 notice. Preserve both
+        notices and satisfy the applicable source terms; do not infer that one
+        silently cancels the other.
+    domain: "real Scania heavy-truck air-pressure-system maintenance records"
+    observed_inputs:
+      - class
+      - 170_anonymized_numeric_sensor_and_histogram_fields_aa_000_through_ee_009
+      - explicit_na_missing_values
+    allowed_labels:
+      - name: "class"
+        origin: "observed_provider_label_for_APS_related_failure"
+    allowed_tasks:
+      - APS_component_failure_classification
+      - missingness_aware_truck_health_representation
+    gaps:
+      - "All 170 predictors are anonymized, so they cannot be mapped to proposed gateway-health or J1939 fields."
+      - "The class distinguishes APS-related failures from other failures; it is not remaining useful life or a general breakdown label."
+      - "No timestamps or vehicle identifiers support chronological, fleet, or leave-one-truck-out validation."
+      - "The positive class is rare and false-negative cost is asymmetric."
+
+  cfs_2022_pums:
+    usage_status: "candidate_not_used_by_current_model"
+    title: "2022 Commodity Flow Survey Public Use Microdata Sample"
+    publisher: "U.S. Census Bureau / Bureau of Transportation Statistics"
+    landing_url: "https://www.census.gov/data/datasets/2022/econ/cfs/historical-datasets.html"
+    download_url: "https://www2.census.gov/programs-surveys/cfs/datasets/2022/cfs_2022_pums.zip"
+    dictionary_url: "https://www2.census.gov/programs-surveys/cfs/datasets/2022/cfs_2022_pums_data_dictionary.xlsx"
+    artifact_id: "census:cfs:2022:pums"
+    artifact_name: "cfs_2022_pums.zip"
+    expected_bytes: 677530696
+    license:
+      name: "U.S. government public-use microdata"
+      url: "https://www.census.gov/data/datasets/2022/econ/cfs/historical-datasets.html"
+      raw_redistribution: "follow Census citation and public-use documentation"
+    observed_inputs:
+      - shipment_date
+      - origin_and_destination_geography
+      - commodity
+      - shipment_weight
+      - shipment_value
+      - transport_mode
+      - routed_distance
+      - export_indicator
+      - hazmat_indicator
+      - temperature_control_indicator
+    allowed_labels:
+      - name: "observed_transport_mode"
+        origin: "observed"
+      - name: "routed_distance"
+        origin: "published_source_estimate"
+      - name: "shipment_value_and_weight"
+        origin: "observed_public_use_record"
+    allowed_tasks:
+      - shipment_representation
+      - truck_mode_auxiliary_classification
+      - corridor_demand_prior
+    gaps:
+      - "Geography is coarse and disclosure-protected."
+      - "It is not a live order book and contains no truck assignment or tender acceptance."
+      - "Shipment value is cargo value, not a freight quote."
+
+  amazon_last_mile_2021:
+    usage_status: "core_training"
+    title: "2021 Amazon Last Mile Routing Research Challenge Dataset"
+    publisher: "Amazon / MIT Center for Transportation and Logistics"
+    landing_url: "https://registry.opendata.aws/amazon-last-mile-challenges/"
+    download_url: "s3://amazon-last-mile-challenges/almrrc2021/"
+    artifact_id: "aws-open-data:amazon-last-mile-challenges:almrrc2021"
+    artifact_name: "almrrc2021"
+    expected_bytes: 672679067
+    update_frequency: "none"
+    license:
+      name: "CC BY-NC 4.0"
+      url: "https://creativecommons.org/licenses/by-nc/4.0/"
+      raw_redistribution: "do not redistribute from this repository"
+      acknowledgement_required: "ACCEPT_AMAZON_CC_BY_NC_4_0=1"
+      caveat: >-
+        Non-commercial use only. Treat competition work as research/prototyping;
+        obtain separate permission before commercial use or production training.
+    domain: >-
+      9,164 real routes in the locked build/evaluation JSON files (6,112 build
+      and 3,052 evaluation), representing 2018 last-mile van operations in five
+      U.S. metropolitan areas.
+    observed_inputs:
+      - station_and_route_date
+      - executor_volumetric_capacity
+      - package_dimensions
+      - package_time_windows
+      - stop_coordinates_obfuscated_by_provider
+      - historical_travel_time_matrix
+    allowed_labels:
+      - name: "actual_driver_stop_sequence"
+        origin: "observed"
+      - name: "actual_route_executor_assignment"
+        origin: "observed_route_membership"
+      - name: "route_score"
+        origin: "observed_provider_label"
+      - name: "same_station_day_feasibility"
+        origin: "same_source_solver_derived"
+    allowed_tasks:
+      - assignment_ranking
+      - route_pointer_decoding
+      - time_window_and_capacity_conditioning
+    gaps:
+      - "Last-mile vans and parcels are not Indonesian line-haul trucks or FTL cargo."
+      - "Coordinates are obfuscated and there is no truck CAN/fuel stream."
+      - "Actual assignment is operational history, not randomized counterfactual reward."
+      - "The dataset paper reports 3,072 evaluation routes, while the six locked public JSON objects used here contain 3,052 matching evaluation IDs; this release reports and hashes the files actually processed."
+
+  lade:
+    usage_status: "core_training"
+    title: "LaDe: Last-mile Delivery Dataset from Industry"
+    publisher: "Cainiao AI / Hugging Face"
+    landing_url: "https://huggingface.co/datasets/Cainiao-AI/LaDe"
+    download_url: "hf://datasets/Cainiao-AI/LaDe"
+    artifact_id: "huggingface:Cainiao-AI/LaDe@be2cec02775cafc8d52230303f32134382bcc50b"
+    artifact_name: "LaDe"
+    expected_bytes: null
+    pinned_revision: "be2cec02775cafc8d52230303f32134382bcc50b"
+    license:
+      name: "Apache-2.0 metadata with research-use caveat"
+      url: "https://huggingface.co/datasets/Cainiao-AI/LaDe/blob/main/README.md"
+      raw_redistribution: "do not redistribute from this repository"
+      acknowledgement_required: "ACCEPT_LADE_RESEARCH_TERMS=1"
+      caveat: >-
+        The Hugging Face card declares Apache-2.0, while its README separately
+        states that LaDe can be used for research purposes and tells users to
+        read terms before download. Preserve both statements; do not infer
+        unrestricted production or commercial rights.
+    domain: "10.677 million real packages, 21,000 couriers, six months, five Chinese cities"
+    observed_inputs:
+      - task_location_and_time_window
+      - courier_identifier
+      - accept_pickup_and_delivery_event_times
+      - event_GPS
+      - optional_courier_trajectory
+    allowed_labels:
+      - name: "accept_to_pickup_or_delivery_duration"
+        origin: "same_source_derived_from_observed_events"
+      - name: "observed_courier_task_order"
+        origin: "same_source_derived_from_event_time"
+    allowed_tasks:
+      - pickup_and_delivery_ETA
+      - task_sequence
+      - spatial_demand_prior
+    gaps:
+      - "Couriers and parcels are an analogue, not heavy trucks."
+      - "No vehicle capacity, fuel, CAN, truckload price, or dispatcher tender outcome."
+
+  athens_pharmaceutical_3pl:
+    usage_status: "external_audit_only"
+    title: "Delivering Data: A Real-World Dataset for Last-Mile Delivery Optimization"
+    publisher: "Centre for Research and Technology Hellas / Zenodo"
+    citation_doi: "10.5281/zenodo.15310106"
+    article_doi: "10.1016/j.dib.2025.111762"
+    landing_url: "https://zenodo.org/records/15310106"
+    metadata_url: "https://zenodo.org/api/records/15310106"
+    download_url: "https://zenodo.org/api/records/15310106/files/data.zip/content"
+    artifact_id: "zenodo:15310106:data.zip"
+    artifact_name: "data.zip"
+    expected_bytes: 2926700
+    license:
+      name: "CC BY 4.0"
+      url: "https://creativecommons.org/licenses/by/4.0/"
+      raw_redistribution: "only under source license with attribution"
+    domain: >-
+      Nine real daily pharmaceutical delivery instances from an Athens 3PL,
+      covering roughly four to five weeks and 60--85 delivery requests per day.
+    observed_inputs:
+      - order_weight_kg
+      - order_volume_m3
+      - service_time_minutes
+      - earliest_and_latest_arrival_minutes
+      - pairwise_distance_km
+      - optimistic_most_likely_and_pessimistic_travel_time_minutes
+    allowed_labels:
+      - name: "same_day_order_attributes"
+        origin: "observed_3PL_order_management_records"
+      - name: "distance_and_scenario_travel_time_matrices"
+        origin: "provider_API_derived_from_same_day_locations"
+    allowed_tasks:
+      - capacity_and_time_window_schema_audit
+      - travel_time_uncertainty_audit
+      - external_real_VRPTW_evaluation_when_vehicle_capacity_is_supplied_by_the_same_source_or_operator
+    gaps:
+      - "Exact locations are withheld."
+      - "The archive does not publish the fleet's vehicle capacity values."
+      - "No actual driven sequence, truck telemetry, tender, price, fuel, or outcome is supplied."
+      - "This release does not attach a vehicle capacity from another dataset and does not train on these rows."
+
+  road_can_ids:
+    usage_status: "candidate_not_used_by_current_model"
+    title: "Real ORNL Automotive Dynamometer CAN Intrusion Dataset"
+    publisher: "Oak Ridge National Laboratory / Zenodo"
+    citation_doi: "10.13139/ORNLNCCS/1728694"
+    landing_url: "https://zenodo.org/records/10462796"
+    download_url: "https://zenodo.org/records/10462796/files/road.zip?download=1"
+    artifact_id: "zenodo:10462796:road.zip"
+    artifact_name: "road.zip"
+    expected_bytes: null
+    license:
+      name: "Review source record before redistribution"
+      url: "https://zenodo.org/records/10462796"
+      raw_redistribution: "prohibited here until the source license is reviewed"
+    observed_inputs:
+      - raw_CAN_frames
+      - signal_translated_captures
+      - ambient_capture_metadata
+      - attack_capture_metadata
+    allowed_labels:
+      - name: "attack_interval_and_family"
+        origin: "observed_and_provider_annotated"
+    allowed_tasks:
+      - CAN_intrusion_detection
+    gaps:
+      - "One undisclosed passenger vehicle, not truck J1939."
+      - "CAN anomaly detection does not authenticate a gateway or MQTT device."
+
+  route_deviation_mendeley:
+    usage_status: "external_audit_only"
+    title: "Last-mile delivery route deviations: planned vs. actual routes"
+    publisher: "Mendeley Data"
+    citation_doi: "10.17632/kkwgfvmtxn.1"
+    landing_url: "https://data.mendeley.com/datasets/kkwgfvmtxn/1"
+    metadata_url: "https://data.mendeley.com/public-api/datasets/kkwgfvmtxn"
+    download_url: "https://data.mendeley.com/public-files/datasets/kkwgfvmtxn/files/388ea249-0830-4906-a39e-7bcbd5ee837a/file_downloaded"
+    artifact_id: "mendeley:kkwgfvmtxn:1:388ea249-0830-4906-a39e-7bcbd5ee837a"
+    artifact_name: "routes_performance.xlsx"
+    expected_bytes: 19713337
+    license:
+      name: "CC BY 4.0"
+      url: "https://creativecommons.org/licenses/by/4.0/"
+      raw_redistribution: "only under source license with attribution"
+    domain: "19,497 planned/actual route pairs, 400 drivers, Norway and Denmark"
+    observed_inputs:
+      - planned_and_actual_stop_indices
+      - route_stop_and_driver_identifiers
+      - relative_timing
+      - planned_and_actual_distance
+    allowed_labels:
+      - name: "route_deviation_magnitude"
+        origin: "same_source_derived_from_planned_and_actual_sequence"
+      - name: "actual_sequence"
+        origin: "observed"
+    allowed_tasks:
+      - route_deviation_prediction
+    gaps:
+      - "Coordinates and absolute timestamps are removed."
+      - "A driver deviation can be legitimate and must not be labelled misconduct."
+
+  olist_brazilian_ecommerce:
+    usage_status: "candidate_not_used_by_current_model"
+    title: "Brazilian E-Commerce Public Dataset by Olist"
+    publisher: "Olist / Kaggle"
+    landing_url: "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce"
+    download_url: "kaggle://datasets/olistbr/brazilian-ecommerce"
+    artifact_id: "kaggle:olistbr/brazilian-ecommerce:version-2"
+    artifact_name: "brazilian-ecommerce"
+    expected_bytes: null
+    license:
+      name: "Verify authenticated Kaggle license before use"
+      url: "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce"
+      raw_redistribution: "prohibited here"
+      acknowledgement_required: "ACCEPT_OLIST_DATASET_TERMS=1"
+      caveat: >-
+        Public mirrors commonly identify CC BY-NC-SA 4.0, but the authenticated
+        Kaggle dataset page is the authority. Capture the displayed license at
+        download time and do not use the data if its terms conflict with the
+        competition or intended distribution.
+    domain: "approximately 100,000 real marketplace orders in Brazil, 2016-2018"
+    observed_inputs:
+      - seller_and_customer_zip_geography
+      - product_weight_and_dimensions
+      - purchase_shipping_and_delivery_timestamps
+    allowed_labels:
+      - name: "freight_value"
+        origin: "observed_commercial_order_field"
+      - name: "delivery_delay"
+        origin: "same_source_derived_from_observed_timestamps"
+    allowed_tasks:
+      - proxy_freight_price_quantiles
+      - delivery_delay
+    gaps:
+      - "Parcel freight charged to customers is not Indonesian truckload spot price."
+      - "No truck, fuel, route sequence, or tender acceptance data."
+
+  nyc_tlc_yellow_2024_01:
+    usage_status: "core_training"
+    title: "NYC TLC Yellow Taxi Trip Records, January 2024"
+    publisher: "New York City Taxi and Limousine Commission"
+    landing_url: "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"
+    download_url: "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
+    terms_url: "https://opendata.cityofnewyork.us/overview/#termsofuse"
+    artifact_id: "nyc-tlc:yellow:2024-01"
+    artifact_name: "yellow_tripdata_2024-01.parquet"
+    expected_bytes: 49961641
+    license:
+      name: "NYC Open Data Terms of Use; no software-license claim"
+      url: "https://opendata.cityofnewyork.us/overview/#termsofuse"
+      raw_redistribution: "follow NYC Open Data terms and preserve source attribution"
+    domain: "real metered yellow-taxi trips in New York City during January 2024"
+    observed_inputs:
+      - VendorID
+      - tpep_pickup_datetime
+      - tpep_dropoff_datetime
+      - passenger_count
+      - trip_distance
+      - RatecodeID
+      - store_and_fwd_flag
+      - PULocationID
+      - DOLocationID
+      - payment_type
+      - fare_amount
+      - extra
+      - mta_tax
+      - tip_amount
+      - tolls_amount
+      - improvement_surcharge
+      - total_amount
+      - congestion_surcharge
+      - Airport_fee
+    allowed_labels:
+      - name: "fare_amount"
+        origin: "observed_meter_fare_field"
+      - name: "trip_duration"
+        origin: "same_source_derived_from_pickup_and_dropoff_timestamps"
+    allowed_tasks:
+      - same_row_metered_fare_regression_proxy
+      - taxi_trip_duration_auxiliary_task
+    gaps:
+      - "Passenger-taxi meter fare is not Indonesian truckload freight price, auction outcome, or dispatcher margin."
+      - "Taxi-zone identifiers are coarse; this file has no path geometry, truck, cargo, fuel, or tender state."
+      - "Fare rules, taxes, surcharges, and market conditions are NYC- and month-specific."
+      - "Reported fields can contain invalid, zero, negative, or extreme values and require explicit quality filters."
+
+  osm_indonesia:
+    usage_status: "candidate_not_used_by_current_model"
+    title: "OpenStreetMap Indonesia extract"
+    publisher: "OpenStreetMap contributors / Geofabrik"
+    landing_url: "https://download.geofabrik.de/asia/indonesia.html"
+    download_url: "https://download.geofabrik.de/asia/indonesia-latest.osm.pbf"
+    checksum_url: "https://download.geofabrik.de/asia/indonesia-latest.osm.pbf.md5"
+    artifact_id: "geofabrik:asia:indonesia-latest"
+    artifact_name: "indonesia-latest.osm.pbf"
+    expected_bytes: null
+    license:
+      name: "ODbL 1.0"
+      url: "https://www.openstreetmap.org/copyright"
+      raw_redistribution: "follow ODbL attribution and share-alike obligations"
+    observed_inputs:
+      - mapped_road_geometry
+      - road_class
+      - provider_tagged_restrictions
+    allowed_labels:
+      - name: "shortest_path_distance_or_time"
+        origin: "same_source_solver_derived_from_map_graph"
+    allowed_tasks:
+      - runtime_road_graph
+      - route_distance_matrix
+    gaps:
+      - "Mapped roads are not observed traffic."
+      - "Tags may be incomplete and cannot guarantee truck legality or accessibility."
+
+excluded_sources:
+  deliveree_public_website:
+    reason: >-
+      No verified open bulk research dataset or licensed training API was found.
+      Do not scrape the website or claim Deliveree data without written access.

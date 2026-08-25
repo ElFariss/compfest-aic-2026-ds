@@ -1,0 +1,849 @@
+{
+  "_provenance": {
+    "public_source": "singapore",
+    "raw_artifacts": [
+      {
+        "bytes": 184847448,
+        "path": "singapore-commercial-truck/figshare/A_GPS_OBD.csv",
+        "sha256": "11a6c933a004bcba9ccb09fed57c1d4e857e200d8539e60acbcb09e571a5fa77"
+      },
+      {
+        "bytes": 154259,
+        "path": "singapore-commercial-truck/figshare/A_tripFuelUsed.csv",
+        "sha256": "f86bee3a91d32b6a2b2f8b1773371f721c342e8d92c8aae76947fb2fe797bce3"
+      },
+      {
+        "bytes": 992733,
+        "path": "singapore-commercial-truck/figshare/B_GPS_OBD.csv",
+        "sha256": "a7fa2f410d01709935923a58dcdd3ba8fac47d8b7400e5c5d32b727db4e97af9"
+      },
+      {
+        "bytes": 6421,
+        "path": "singapore-commercial-truck/figshare/B_payload.csv",
+        "sha256": "65edeb899a83fcd2f37950e77f51b4fe6d5804e1eae8cfcbd56ad3245c379f3e"
+      },
+      {
+        "bytes": 39911,
+        "path": "singapore-commercial-truck/figshare/B_tripFuelUsed.csv",
+        "sha256": "45764b20ef88dcf0ce4a91e733bfd0f173a2d23243a970c7aff18728c040e70f"
+      },
+      {
+        "bytes": 517460,
+        "path": "singapore-commercial-truck/figshare/C_GPS_OBD.csv",
+        "sha256": "0391549adfbcdf0a25b99f0fdfdce9c7fc9b408acb45326d3c5ba3ecfb880eed"
+      },
+      {
+        "bytes": 7125,
+        "path": "singapore-commercial-truck/figshare/C_payload.csv",
+        "sha256": "6d6c2315ddf6096655d0f09a11fb189b8c63e7b0402d9e0f64cdb472f7c46ef0"
+      },
+      {
+        "bytes": 10474,
+        "path": "singapore-commercial-truck/figshare/C_tripFuelUsed.csv",
+        "sha256": "e8894ce5f74b541c58ea0775b5a6cab1742efa126da41b183de909ff16eef7d3"
+      },
+      {
+        "bytes": 234678,
+        "path": "singapore-commercial-truck/figshare/D_GPS_OBD.csv",
+        "sha256": "e3183a8f9ebb168f294e26cf5bea4aad895d233e3e50f518e89b2f1730806082"
+      },
+      {
+        "bytes": 6409,
+        "path": "singapore-commercial-truck/figshare/D_payload.csv",
+        "sha256": "061814dc31c0a9d4ee4c7085541019c2094ec1b543815cb4713e897b63408695"
+      },
+      {
+        "bytes": 4823,
+        "path": "singapore-commercial-truck/figshare/D_tripFuelUsed.csv",
+        "sha256": "0ae1167b31f8b01b84b0b6c9af6e05b5e49a304f31dce175464b7943970670d8"
+      },
+      {
+        "bytes": 340992,
+        "path": "singapore-commercial-truck/figshare/E_GPS_OBD.csv",
+        "sha256": "b94f7dcf78175338178951208084e12cbc527f59d93dafe2082bc55411b1c2ed"
+      },
+      {
+        "bytes": 10895,
+        "path": "singapore-commercial-truck/figshare/E_tripFuelUsed.csv",
+        "sha256": "322411af76da06b02315d24a08a3a7c70df54e73540e5c8e323d36364922f84c"
+      },
+      {
+        "bytes": 2005026,
+        "path": "singapore-commercial-truck/figshare/F_GPS_OBD.csv",
+        "sha256": "c17c391b83629bce32318707015cdc8e0c99ea28279c6fe7bea273361666d8a7"
+      },
+      {
+        "bytes": 28604,
+        "path": "singapore-commercial-truck/figshare/F_tripFuelUsed.csv",
+        "sha256": "142f4f6a92627f7af1009080c638fe9f9273a2334225813b373c0194ad8b4640"
+      },
+      {
+        "bytes": 1105114,
+        "path": "singapore-commercial-truck/figshare/G_GPS_OBD.csv",
+        "sha256": "a0a8c1b673bcf43751659b01695ca50e27af18b6d55e1f755b7a73f9d6fc89d4"
+      },
+      {
+        "bytes": 1130,
+        "path": "singapore-commercial-truck/figshare/G_payload.csv",
+        "sha256": "153ae26d0ab5471070e63a47d1fe6e5422401cae941cebace2e775524b6e07ce"
+      },
+      {
+        "bytes": 14204,
+        "path": "singapore-commercial-truck/figshare/G_tripFuelUsed.csv",
+        "sha256": "4ae4c3463e9b68f4a08dceca29ab4c51362fcdc6c03729d102d91ed1e188a4b8"
+      },
+      {
+        "bytes": 50375,
+        "path": "singapore-commercial-truck/figshare/H_GPS_OBD.csv",
+        "sha256": "6a7d44e9181bfd6cd8a7c341abc1f70eede44a37e5595fe28bb1427829479676"
+      },
+      {
+        "bytes": 859,
+        "path": "singapore-commercial-truck/figshare/H_tripFuelUsed.csv",
+        "sha256": "22b2cd46da90aa317bc1472f246f48c7603f705d8a3af31dd0ea9320a7096539"
+      },
+      {
+        "bytes": 3185845,
+        "path": "singapore-commercial-truck/figshare/I_GPS_OBD.csv",
+        "sha256": "cb93bf56775a35116e3a2d98451926a2a5e313560a7eb16b5b1809761f57eaf6"
+      },
+      {
+        "bytes": 4210,
+        "path": "singapore-commercial-truck/figshare/I_payload.csv",
+        "sha256": "11d95921f9429dfccbf735b89c88cf9cfc91417c768e5b7a55a62af86a70b5cc"
+      },
+      {
+        "bytes": 71470,
+        "path": "singapore-commercial-truck/figshare/I_tripFuelUsed.csv",
+        "sha256": "6d24968bacae6f22cc4400f9cd675db1b83e81f5978a85bb469358e9917188dc"
+      },
+      {
+        "bytes": 324287,
+        "path": "singapore-commercial-truck/figshare/J_GPS_OBD.csv",
+        "sha256": "c20a2b4671f252d1180fec2a6b9e32740cc299207d944633193773fb686976aa"
+      },
+      {
+        "bytes": 1611,
+        "path": "singapore-commercial-truck/figshare/J_payload.csv",
+        "sha256": "b14bebd9b588f8df29f277c833a358d084602e579a60a942922c11df4109f926"
+      },
+      {
+        "bytes": 5972,
+        "path": "singapore-commercial-truck/figshare/J_tripFuelUsed.csv",
+        "sha256": "fad59594336ef0709ae9a75a3f0012f2a4e94361dc6d4b15d3f4e980a97e9b64"
+      }
+    ],
+    "sample_id": "7f82b6fb73db87e1b0388a6f",
+    "source_id": "vehicle=I;trip=0",
+    "split": "test",
+    "transform": "fully observed samples from the same held-out first-half trip prefix"
+  },
+  "request_id": "7f82b6fb73db87e1b0388a6f",
+  "samples": [
+    {
+      "delta_t_s": 0.0,
+      "engine_load_pct": 54.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 53.09,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 24.0,
+      "timestamp_utc": "2019-05-20T10:10:05Z"
+    },
+    {
+      "delta_t_s": 57.0,
+      "engine_load_pct": 55.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.05847953216374269,
+      "mass_air_flow_g_s": 23.9,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 12.0,
+      "timestamp_utc": "2019-05-20T10:11:02Z"
+    },
+    {
+      "delta_t_s": 76.0,
+      "engine_load_pct": 59.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.021929824561403508,
+      "mass_air_flow_g_s": 22.03,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 6.0,
+      "timestamp_utc": "2019-05-20T10:12:18Z"
+    },
+    {
+      "delta_t_s": 29.0,
+      "engine_load_pct": 67.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.04789272030651341,
+      "mass_air_flow_g_s": 51.23,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 11.0,
+      "timestamp_utc": "2019-05-20T10:12:47Z"
+    },
+    {
+      "delta_t_s": 49.0,
+      "engine_load_pct": 41.0,
+      "engine_status": 2.0,
+      "longitudinal_acceleration_m_s2": -0.06235827664399093,
+      "mass_air_flow_g_s": 21.59,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 0.0,
+      "timestamp_utc": "2019-05-20T10:13:36Z"
+    },
+    {
+      "delta_t_s": 60.0,
+      "engine_load_pct": 60.5,
+      "engine_status": 2.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 36.96,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 0.0,
+      "timestamp_utc": "2019-05-20T10:14:36Z"
+    },
+    {
+      "delta_t_s": 12.0,
+      "engine_load_pct": 100.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 1.2268518518518519,
+      "mass_air_flow_g_s": 62.54,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0,
+      "speed_kmh": 53.0,
+      "timestamp_utc": "2019-05-20T10:14:48Z"
+    },
+    {
+      "delta_t_s": 13.0,
+      "engine_load_pct": 46.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.23504273504273504,
+      "mass_air_flow_g_s": 48.59,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0010914163185163,
+      "speed_kmh": 64.0,
+      "timestamp_utc": "2019-05-20T10:15:01Z"
+    },
+    {
+      "delta_t_s": 18.0,
+      "engine_load_pct": 40.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.07716049382716049,
+      "mass_air_flow_g_s": 49.9,
+      "observed_fraction": 1.0,
+      "road_grade": 0.019126736981103,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:15:19Z"
+    },
+    {
+      "delta_t_s": 8.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.625,
+      "mass_air_flow_g_s": 30.4,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0204795265480651,
+      "speed_kmh": 51.0,
+      "timestamp_utc": "2019-05-20T10:15:27Z"
+    },
+    {
+      "delta_t_s": 6.0,
+      "engine_load_pct": 98.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.0462962962962963,
+      "mass_air_flow_g_s": 39.9,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0197208423981653,
+      "speed_kmh": 50.0,
+      "timestamp_utc": "2019-05-20T10:15:33Z"
+    },
+    {
+      "delta_t_s": 4.0,
+      "engine_load_pct": 100.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 44.01,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0190692355432882,
+      "speed_kmh": 50.0,
+      "timestamp_utc": "2019-05-20T10:15:37Z"
+    },
+    {
+      "delta_t_s": 16.0,
+      "engine_load_pct": 99.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.12152777777777778,
+      "mass_air_flow_g_s": 54.42,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0107117760711646,
+      "speed_kmh": 57.0,
+      "timestamp_utc": "2019-05-20T10:15:53Z"
+    },
+    {
+      "delta_t_s": 12.0,
+      "engine_load_pct": 58.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.2546296296296296,
+      "mass_air_flow_g_s": 37.54,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0022831662922029,
+      "speed_kmh": 68.0,
+      "timestamp_utc": "2019-05-20T10:16:05Z"
+    },
+    {
+      "delta_t_s": 16.0,
+      "engine_load_pct": 82.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.2777777777777778,
+      "mass_air_flow_g_s": 60.82,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0036782233361514,
+      "speed_kmh": 84.0,
+      "timestamp_utc": "2019-05-20T10:16:21Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 33.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.16666666666666666,
+      "mass_air_flow_g_s": 40.31,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0037800397370642,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:16:31Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.1111111111111111,
+      "mass_air_flow_g_s": 34.54,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0125282704695474,
+      "speed_kmh": 72.0,
+      "timestamp_utc": "2019-05-20T10:16:46Z"
+    },
+    {
+      "delta_t_s": 11.0,
+      "engine_load_pct": 63.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.20202020202020202,
+      "mass_air_flow_g_s": 37.42,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0104251182944421,
+      "speed_kmh": 64.0,
+      "timestamp_utc": "2019-05-20T10:16:57Z"
+    },
+    {
+      "delta_t_s": 18.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.15432098765432098,
+      "mass_air_flow_g_s": 24.79,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0126129130966708,
+      "speed_kmh": 54.0,
+      "timestamp_utc": "2019-05-20T10:17:15Z"
+    },
+    {
+      "delta_t_s": 9.0,
+      "engine_load_pct": 40.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.21604938271604937,
+      "mass_air_flow_g_s": 37.48,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0102545599933201,
+      "speed_kmh": 61.0,
+      "timestamp_utc": "2019-05-20T10:17:24Z"
+    },
+    {
+      "delta_t_s": 17.0,
+      "engine_load_pct": 34.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.13071895424836602,
+      "mass_air_flow_g_s": 41.78,
+      "observed_fraction": 1.0,
+      "road_grade": -0.007129576857092,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:17:41Z"
+    },
+    {
+      "delta_t_s": 11.0,
+      "engine_load_pct": 89.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 50.5,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0164711282449372,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:17:52Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 42.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.01851851851851852,
+      "mass_air_flow_g_s": 38.01,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0175313189293077,
+      "speed_kmh": 70.0,
+      "timestamp_utc": "2019-05-20T10:18:07Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 87.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.05555555555555556,
+      "mass_air_flow_g_s": 54.43,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0347840602683048,
+      "speed_kmh": 72.0,
+      "timestamp_utc": "2019-05-20T10:18:17Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 67.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.1111111111111111,
+      "mass_air_flow_g_s": 45.67,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0317184276794367,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:18:32Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 68.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.02777777777777778,
+      "mass_air_flow_g_s": 46.34,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0127429610308851,
+      "speed_kmh": 77.0,
+      "timestamp_utc": "2019-05-20T10:18:42Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 57.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.01851851851851852,
+      "mass_air_flow_g_s": 44.01,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0227440220818925,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:18:57Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 24.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.08333333333333333,
+      "mass_air_flow_g_s": 41.17,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0024025710744126,
+      "speed_kmh": 81.0,
+      "timestamp_utc": "2019-05-20T10:19:07Z"
+    },
+    {
+      "delta_t_s": 14.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 36.68,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0380971481395367,
+      "speed_kmh": 81.0,
+      "timestamp_utc": "2019-05-20T10:19:21Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 29.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.08333333333333333,
+      "mass_air_flow_g_s": 38.67,
+      "observed_fraction": 1.0,
+      "road_grade": -0.037392147347587,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:19:31Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.01851851851851852,
+      "mass_air_flow_g_s": 38.12,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0126511029568796,
+      "speed_kmh": 79.0,
+      "timestamp_utc": "2019-05-20T10:19:46Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 29.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.02777777777777778,
+      "mass_air_flow_g_s": 41.1,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0007208815883038,
+      "speed_kmh": 80.0,
+      "timestamp_utc": "2019-05-20T10:19:56Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 49.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.2037037037037037,
+      "mass_air_flow_g_s": 34.78,
+      "observed_fraction": 1.0,
+      "road_grade": 0.01123106313292,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:20:11Z"
+    },
+    {
+      "delta_t_s": 11.0,
+      "engine_load_pct": 84.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 48.59,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0183146659280566,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:20:22Z"
+    },
+    {
+      "delta_t_s": 18.0,
+      "engine_load_pct": 95.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.07716049382716049,
+      "mass_air_flow_g_s": 61.34,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0156997146534593,
+      "speed_kmh": 64.0,
+      "timestamp_utc": "2019-05-20T10:20:40Z"
+    },
+    {
+      "delta_t_s": 11.0,
+      "engine_load_pct": 26.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.12626262626262627,
+      "mass_air_flow_g_s": 36.45,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0102166605172729,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:20:51Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 18.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.03703703703703704,
+      "mass_air_flow_g_s": 34.78,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0287101465955528,
+      "speed_kmh": 71.0,
+      "timestamp_utc": "2019-05-20T10:21:06Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 40.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.11111111111111112,
+      "mass_air_flow_g_s": 39.34,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0029551649429069,
+      "speed_kmh": 75.0,
+      "timestamp_utc": "2019-05-20T10:21:16Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 71.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.09259259259259259,
+      "mass_air_flow_g_s": 48.89,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0200482169348552,
+      "speed_kmh": 80.0,
+      "timestamp_utc": "2019-05-20T10:21:31Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 54.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.02777777777777778,
+      "mass_air_flow_g_s": 44.42,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0191824336066998,
+      "speed_kmh": 81.0,
+      "timestamp_utc": "2019-05-20T10:21:41Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 40.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.05555555555555555,
+      "mass_air_flow_g_s": 39.84,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0044633738473092,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:21:56Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 33.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 40.64,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0003226125637744,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:22:06Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 57.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.03703703703703704,
+      "mass_air_flow_g_s": 44.14,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0098789756050712,
+      "speed_kmh": 80.0,
+      "timestamp_utc": "2019-05-20T10:22:21Z"
+    },
+    {
+      "delta_t_s": 9.0,
+      "engine_load_pct": 49.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.09259259259259259,
+      "mass_air_flow_g_s": 44.89,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0069542823397401,
+      "speed_kmh": 83.0,
+      "timestamp_utc": "2019-05-20T10:22:30Z"
+    },
+    {
+      "delta_t_s": 14.0,
+      "engine_load_pct": 25.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.0992063492063492,
+      "mass_air_flow_g_s": 38.12,
+      "observed_fraction": 1.0,
+      "road_grade": 7.54176056150885e-05,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:22:44Z"
+    },
+    {
+      "delta_t_s": 16.0,
+      "engine_load_pct": 6.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.06944444444444445,
+      "mass_air_flow_g_s": 35.475,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0026114705119408,
+      "speed_kmh": 74.0,
+      "timestamp_utc": "2019-05-20T10:23:00Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 29.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.07407407407407408,
+      "mass_air_flow_g_s": 38.89,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0031894650444477,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:23:15Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 30.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0,
+      "mass_air_flow_g_s": 39.17,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0078095032888576,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:23:25Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 57.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.03703703703703704,
+      "mass_air_flow_g_s": 44.62,
+      "observed_fraction": 1.0,
+      "road_grade": 0.0008086052657702,
+      "speed_kmh": 80.0,
+      "timestamp_utc": "2019-05-20T10:23:40Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 10.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.16666666666666666,
+      "mass_air_flow_g_s": 36.34,
+      "observed_fraction": 1.0,
+      "road_grade": -1.1693473316663e-05,
+      "speed_kmh": 74.0,
+      "timestamp_utc": "2019-05-20T10:23:50Z"
+    },
+    {
+      "delta_t_s": 12.0,
+      "engine_load_pct": 28.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.1851851851851852,
+      "mass_air_flow_g_s": 39.59,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0082616867243016,
+      "speed_kmh": 66.0,
+      "timestamp_utc": "2019-05-20T10:24:02Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 20.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.19444444444444445,
+      "mass_air_flow_g_s": 36.23,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0093751903533181,
+      "speed_kmh": 73.0,
+      "timestamp_utc": "2019-05-20T10:24:12Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 32.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.09259259259259259,
+      "mass_air_flow_g_s": 39.89,
+      "observed_fraction": 1.0,
+      "road_grade": -0.00992674004933,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:24:27Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 36.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.1388888888888889,
+      "mass_air_flow_g_s": 42.5,
+      "observed_fraction": 1.0,
+      "road_grade": -0.010396216288804,
+      "speed_kmh": 83.0,
+      "timestamp_utc": "2019-05-20T10:24:37Z"
+    },
+    {
+      "delta_t_s": 14.0,
+      "engine_load_pct": 46.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.03968253968253969,
+      "mass_air_flow_g_s": 42.89,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0103059913871909,
+      "speed_kmh": 81.0,
+      "timestamp_utc": "2019-05-20T10:24:51Z"
+    },
+    {
+      "delta_t_s": 10.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.08333333333333333,
+      "mass_air_flow_g_s": 35.57,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0063060919711386,
+      "speed_kmh": 78.0,
+      "timestamp_utc": "2019-05-20T10:25:01Z"
+    },
+    {
+      "delta_t_s": 15.0,
+      "engine_load_pct": 18.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.16666666666666666,
+      "mass_air_flow_g_s": 33.75,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0140083300969752,
+      "speed_kmh": 69.0,
+      "timestamp_utc": "2019-05-20T10:25:16Z"
+    },
+    {
+      "delta_t_s": 12.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.32407407407407407,
+      "mass_air_flow_g_s": 26.42,
+      "observed_fraction": 1.0,
+      "road_grade": -0.012890997189241,
+      "speed_kmh": 55.0,
+      "timestamp_utc": "2019-05-20T10:25:28Z"
+    },
+    {
+      "delta_t_s": 7.0,
+      "engine_load_pct": 99.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.5555555555555556,
+      "mass_air_flow_g_s": 30.53,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122298336799313,
+      "speed_kmh": 41.0,
+      "timestamp_utc": "2019-05-20T10:25:35Z"
+    },
+    {
+      "delta_t_s": 6.0,
+      "engine_load_pct": 0.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.0462962962962963,
+      "mass_air_flow_g_s": 19.6,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122287933265829,
+      "speed_kmh": 42.0,
+      "timestamp_utc": "2019-05-20T10:25:41Z"
+    },
+    {
+      "delta_t_s": 6.0,
+      "engine_load_pct": 43.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.27777777777777773,
+      "mass_air_flow_g_s": 27.01,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122285542528881,
+      "speed_kmh": 48.0,
+      "timestamp_utc": "2019-05-20T10:25:47Z"
+    },
+    {
+      "delta_t_s": 4.0,
+      "engine_load_pct": 72.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.3472222222222222,
+      "mass_air_flow_g_s": 38.54,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122287057685029,
+      "speed_kmh": 53.0,
+      "timestamp_utc": "2019-05-20T10:25:51Z"
+    },
+    {
+      "delta_t_s": 33.0,
+      "engine_load_pct": 38.5,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": 0.008417508417508417,
+      "mass_air_flow_g_s": 37.45,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122286739823807,
+      "speed_kmh": 54.0,
+      "timestamp_utc": "2019-05-20T10:26:24Z"
+    },
+    {
+      "delta_t_s": 8.0,
+      "engine_load_pct": 38.0,
+      "engine_status": 1.0,
+      "longitudinal_acceleration_m_s2": -0.1388888888888889,
+      "mass_air_flow_g_s": 38.31,
+      "observed_fraction": 1.0,
+      "road_grade": -0.0122286792246683,
+      "speed_kmh": 50.0,
+      "timestamp_utc": "2019-05-20T10:26:32Z"
+    }
+  ],
+  "schema_version": "haulio.real-policy.telemetry.v1"
+}

@@ -6,8 +6,10 @@ __pycache__/
 data/*.sqlite3
 data/*.sqlite3-*
 data/context/
+data_sources/raw/
+data_sources/processed/
+real_policy/artifacts/
 .ipynb_checkpoints/
-learned_policy/artifacts/
 **/best_checkpoint.pt
 *.tex
 *.aux

@@ -1,0 +1,33 @@
+{
+  "_provenance": {
+    "public_source": "tlc",
+    "raw_artifacts": [
+      {
+        "bytes": 49961641,
+        "path": "tlc/yellow_tripdata_2024-01.parquet",
+        "sha256": "c4d59da7bbc8abaeeeb1727947ee93d9891a71acb42854bd80db1571b2030510"
+      }
+    ],
+    "sample_id": "9369fad9b290eeb61e42b804",
+    "source_id": "row=2187824",
+    "split": "final",
+    "transform": "exact canonical features from one chronological held-out trip row"
+  },
+  "feature_schema": "nyc-tlc-logfare-12.v1",
+  "normalized_source_features": [
+    0.6931471824645996,
+    1.9482883214950562,
+    0.08310249447822571,
+    0.0,
+    0.0,
+    0.10000000149011612,
+    0.3799999952316284,
+    0.15000000596046448,
+    0.06540312618017197,
+    0.9978589415550232,
+    -0.4338837265968323,
+    -0.9009688496589661
+  ],
+  "request_id": "9369fad9b290eeb61e42b804",
+  "schema_version": "haulio.real-policy.price.v1"
+}

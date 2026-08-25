@@ -1,0 +1,33 @@
+{
+  "_provenance": {
+    "public_source": "vius",
+    "raw_artifacts": [
+      {
+        "bytes": 3528049,
+        "path": "vius/vius_2021_puf_csv.zip",
+        "sha256": "25261e9188c0d69d9e0774d6d06c9314b2b83de14d95865f3c9d2c71472b479b"
+      }
+    ],
+    "sample_id": "f4146cc2a7b0bcbeaa917069",
+    "source_id": "VIUS-ID=19",
+    "split": "test",
+    "transform": "unmodified fields from one state-disjoint public-use survey row"
+  },
+  "feature_schema": "vius-2021-12-values-plus-mask.v1",
+  "raw_values": {
+    "AVGWEIGHT": 12.0,
+    "GVWR_CLASS": 8.0,
+    "MILESANNL": 1598.0,
+    "MILESLIFE": 779887.0,
+    "MONTHOPERATE": 2.0,
+    "MPG": 1.0,
+    "RO_0_50": 10.0,
+    "RO_201_500": 37.0,
+    "RO_51_100": 23.0,
+    "RO_GT500": 0.0,
+    "TOWCAPACITY": 5.0,
+    "WEIGHOUTPCT": 0.0
+  },
+  "request_id": "f4146cc2a7b0bcbeaa917069",
+  "schema_version": "haulio.real-policy.deadhead.v1"
+}

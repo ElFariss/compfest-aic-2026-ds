@@ -1,0 +1,1418 @@
+{
+  "assembly": "Amazon and LaDe plus a parallel five-source invocation of the identical preprocessor; every processed file is independently hashed below",
+  "candidate_selection_reads_target": false,
+  "claim_boundary": "per-source component validation only; no joined Haulio operational outcome",
+  "contains_synthetic": false,
+  "cross_source_rows_joined": false,
+  "elapsed_seconds": null,
+  "prepared_utc": "2026-08-25T07:29:49.162053+00:00",
+  "preprocessing_sha256": "dac06e34e73852836efba8c08e655a4b99fd13acb7114661db8a399ef20fe9cb",
+  "random_feature_generation": false,
+  "schema_version": "1.0",
+  "selected_sources": [
+    "amazon",
+    "lade",
+    "singapore",
+    "dtcargo",
+    "vius",
+    "scania",
+    "tlc"
+  ],
+  "source_specific_batches": true,
+  "sources": {
+    "amazon": {
+      "candidate_set_boundary": "metrics include only rows whose target lies in the target-independent nearest-32 set",
+      "files": {
+        "final": {
+          "arrays": {
+            "candidate_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                16
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U50",
+              "shape": [
+                10000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            }
+          },
+          "bytes": 10648002,
+          "group_set_sha256": "5425dfe3ed1837ad9f1465c37009e8951d19391f38e8c12d90817ee00f177790",
+          "path": "amazon_final.npz",
+          "rows": 10000,
+          "sample_id_order_sha256": "cfdab7aa9f5d2a7b5199d035a6b40c98da9794ca99cc6fcf8055a67a82c302e3",
+          "sha256": "468573559cfac378ca9575f1018fcaeed23362a28b644f7c17ebe27edc8fd745"
+        },
+        "train": {
+          "arrays": {
+            "candidate_id": {
+              "dtype": "<U24",
+              "shape": [
+                60000,
+                32
+              ]
+            },
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                60000,
+                16
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                60000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                60000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                60000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                60000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U50",
+              "shape": [
+                60000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                60000
+              ]
+            }
+          },
+          "bytes": 63642242,
+          "group_set_sha256": "452c1fccffd2af7d6332c502d63a2a87c7d3164a45d0d6a293cbc33ac13f7cc5",
+          "path": "amazon_train.npz",
+          "rows": 60000,
+          "sample_id_order_sha256": "5f1627983f6f43a26029bbe3e8140d7c4540d7dca33853450e543ea9a3e5040a",
+          "sha256": "7ebaef8fc5df8903797e45c3e0fae9cd215f817608ab3e401b7f1688d07a3d97"
+        },
+        "val": {
+          "arrays": {
+            "candidate_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                16
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U50",
+              "shape": [
+                10000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            }
+          },
+          "bytes": 10589447,
+          "group_set_sha256": "5a92d4d932524ef20a7d9b3e8471c87705eaf9a59ae1d37c8098fb71d90d40d2",
+          "path": "amazon_val.npz",
+          "rows": 10000,
+          "sample_id_order_sha256": "fcb6863e5efa709bf74374ffbc0ff993b15af2d3a871b01fc931808215c88958",
+          "sha256": "d6260e3faafe8e0679009a476bce96a1ea0b6291063d06359b83763386af2cfc"
+        }
+      },
+      "kind": "real operational last-mile routes",
+      "observed_target": "actual next stop in driver sequence",
+      "raw_files": [
+        {
+          "bytes": 78972162,
+          "path": "amazon/train/route_data.json",
+          "sha256": "da3a5d4e73b683d756111f0d9e6d3f20eb8e82adf7c89ee6ee0cb2239abd2f38"
+        },
+        {
+          "bytes": 375437806,
+          "path": "amazon/train/package_data.json",
+          "sha256": "9ac858358e9f43d34cb65198c03601c814328a06dec9b71ee88b40aaec7f0966"
+        },
+        {
+          "bytes": 9665078,
+          "path": "amazon/train/actual_sequences.json",
+          "sha256": "3de44067242e8fa841d4b852db8809afaa23fe852e452ee4a2f54f0f0fb77e3c"
+        },
+        {
+          "bytes": 37777768,
+          "path": "amazon/eval/route_data.json",
+          "sha256": "dfd8a198b9df5e3b194d3a268f6f442edcd77f028870d54a8d7397a7bc366466"
+        },
+        {
+          "bytes": 166201035,
+          "path": "amazon/eval/package_data.json",
+          "sha256": "612f9aae67df34e637b106a6e2b1cd627fee11fdc0107937bdb56f8c61ec7848"
+        },
+        {
+          "bytes": 4625218,
+          "path": "amazon/eval/actual_sequences.json",
+          "sha256": "30e924b5f263bd5e0a4bb58a756c8f6767b49d59a6bfa718ce26d2767a2c90e9"
+        }
+      ]
+    },
+    "dtcargo": {
+      "files": {
+        "test": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                16336,
+                16
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                16336
+              ]
+            },
+            "source_id": {
+              "dtype": "<U23",
+              "shape": [
+                16336
+              ]
+            },
+            "split_group": {
+              "dtype": "<U2",
+              "shape": [
+                16336
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                16336,
+                4
+              ]
+            }
+          },
+          "bytes": 679876,
+          "group_set_sha256": "29ddda3881ee8fd85f6d0467ca4b35e651c9014dc94ab8f8f2b1d3724cba2b36",
+          "path": "dtcargo_test.npz",
+          "rows": 16336,
+          "sample_id_order_sha256": "67f7e46ea55081a9bf51d3697ecaea3772d2b963cea50c2b1f704c4e7624e80d",
+          "sha256": "689ae9ec5249ce6cdb23ee52b23bea571ab2ca7b72034c8ab6eacce35f586e31"
+        },
+        "train": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                71120,
+                16
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                71120
+              ]
+            },
+            "source_id": {
+              "dtype": "<U23",
+              "shape": [
+                71120
+              ]
+            },
+            "split_group": {
+              "dtype": "<U2",
+              "shape": [
+                71120
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                71120,
+                4
+              ]
+            }
+          },
+          "bytes": 2954565,
+          "group_set_sha256": "5ddc248bde4f28c8fabe0d6b670f1a3b7677cdbb3618b9d8146609e3dfa90837",
+          "path": "dtcargo_train.npz",
+          "rows": 71120,
+          "sample_id_order_sha256": "05929335f40dfbd5dd65f6ffae2d3c4d34e7b3757a58cc79a40f9f626b35bc88",
+          "sha256": "a1aa34ad7cd270e76e1e434c2d195f58c6c097fba037cc265a2ad3928ba7f195"
+        },
+        "val": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                14370,
+                16
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                14370
+              ]
+            },
+            "source_id": {
+              "dtype": "<U22",
+              "shape": [
+                14370
+              ]
+            },
+            "split_group": {
+              "dtype": "<U2",
+              "shape": [
+                14370
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                14370,
+                4
+              ]
+            }
+          },
+          "bytes": 615874,
+          "group_set_sha256": "7516e102579ce82c2bf20f75b6c4f4719bd9de7ad418e338e940d9df924e691e",
+          "path": "dtcargo_val.npz",
+          "rows": 14370,
+          "sample_id_order_sha256": "32b69fdeb76542568edd965ca3e8e6dbe8eec5452116ec6a0a8c89143a654580",
+          "sha256": "645d0ac9eac95818688fa2701c66cc9c3101a2dfb1c3e8afe1f94fb8290666c0"
+        }
+      },
+      "kind": "real class-N3 heavy-truck track summaries",
+      "raw_files": [
+        {
+          "bytes": 1130,
+          "path": "dt-cargo/input/public/fleet.csv",
+          "sha256": "ef21179d2b383044046bd6e226f43daa6c09a330e81bb5192bc6b0b68d3e1bd0"
+        },
+        {
+          "bytes": 16381647,
+          "path": "dt-cargo/input/public/tracks.csv",
+          "sha256": "93843c433deb3f3347cb261a7458cdba827b96225f828413f3aa1b42489af548"
+        }
+      ],
+      "targets": [
+        "timestamp-derived duration",
+        "observed signal-loss ratio",
+        "published home-base flag",
+        "published long-haul flag"
+      ],
+      "vehicle_disjoint": true
+    },
+    "lade": {
+      "candidate_set_boundary": "metrics include only rows whose target lies in the target-independent nearest-32 set",
+      "courier_disjoint": true,
+      "eta_target": "same-source interval capped at 72 hours",
+      "files": {
+        "test": {
+          "arrays": {
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                16
+              ]
+            },
+            "eta_hours": {
+              "dtype": "float32",
+              "shape": [
+                10000
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U111",
+              "shape": [
+                10000
+              ]
+            },
+            "stop_target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            }
+          },
+          "bytes": 2799652,
+          "group_set_sha256": "25129241738014fb2418d6371039b2e415f64921d4d24c15fa343f1944c7a541",
+          "path": "lade_test.npz",
+          "rows": 10000,
+          "sample_id_order_sha256": "4128a5c40fca7b5103ae156b4b5eb4905fafb604b8b942c521a46ec5729c0667",
+          "sha256": "917fa61644a7362d98478cbc278ea96c4c5c411b7f8025c02d23b2b9712b4184"
+        },
+        "train": {
+          "arrays": {
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                60000,
+                16
+              ]
+            },
+            "eta_hours": {
+              "dtype": "float32",
+              "shape": [
+                60000
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                60000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                60000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                60000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                60000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U111",
+              "shape": [
+                60000
+              ]
+            },
+            "stop_target": {
+              "dtype": "int64",
+              "shape": [
+                60000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                60000
+              ]
+            }
+          },
+          "bytes": 16716723,
+          "group_set_sha256": "6163beeda4d83ef443861f39cb467485496b90b5eb9d042c95dee4b8331bb239",
+          "path": "lade_train.npz",
+          "rows": 60000,
+          "sample_id_order_sha256": "0a3e9653b74d56d2dc372e452d77df5a22862d4ca32f102c64a18712ff0edef0",
+          "sha256": "427b48296a0040fdd62338a85dde8f3d78f52accc6654a0f7dd2dff85f08e158"
+        },
+        "val": {
+          "arrays": {
+            "context": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                16
+              ]
+            },
+            "eta_hours": {
+              "dtype": "float32",
+              "shape": [
+                10000
+              ]
+            },
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                10000,
+                32
+              ]
+            },
+            "nodes": {
+              "dtype": "float32",
+              "shape": [
+                10000,
+                32,
+                16
+              ]
+            },
+            "route_group": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                10000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U111",
+              "shape": [
+                10000
+              ]
+            },
+            "stop_target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            },
+            "target": {
+              "dtype": "int64",
+              "shape": [
+                10000
+              ]
+            }
+          },
+          "bytes": 2784499,
+          "group_set_sha256": "d024eca16fd8a2e4cdf6a18562a460a2c6e78533708478687de59c93754c2556",
+          "path": "lade_val.npz",
+          "rows": 10000,
+          "sample_id_order_sha256": "0d3881be8ce7d90ba2ad62904ab2b9eb84c9d9376de93672a7d5da3424519452",
+          "sha256": "34fc55a581753496b1dd2197793448db5fe83318c3b8636e1d896a0bf6ddabac"
+        }
+      },
+      "kind": "real courier task events",
+      "observed_target": "actual next task by observed completion time",
+      "raw_files": [
+        {
+          "bytes": 135539702,
+          "path": "lade/delivery_five_cities.csv",
+          "sha256": "a22b49b57a0201a2b569f80a8282e9147d37db1c2cc374fdf6111aad3d9a3d97"
+        },
+        {
+          "bytes": 154069529,
+          "path": "lade/pickup_five_cities.csv",
+          "sha256": "966b5365d0a02422929088277c2838569c5a30458275e4b2587cb9b64fb8011a"
+        }
+      ]
+    },
+    "scania": {
+      "files": {
+        "final": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                16000,
+                340
+              ]
+            },
+            "label": {
+              "dtype": "float32",
+              "shape": [
+                16000
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                16000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U40",
+              "shape": [
+                16000
+              ]
+            },
+            "split_group": {
+              "dtype": "<U24",
+              "shape": [
+                16000
+              ]
+            }
+          },
+          "bytes": 5787220,
+          "group_set_sha256": "4268a0a34a0f799ff7077d54bae5a6a742ce596f8e66a88bd47e1f36c5947966",
+          "path": "scania_final.npz",
+          "rows": 16000,
+          "sample_id_order_sha256": "bd9a31f519f645cbb2e971e7b7e09008893f75f06c69e936149b96f6405bbf86",
+          "sha256": "c88c96ade2f9ebdb3859590ef8b90da5568b85a5535d55caab5d5072f842a900"
+        },
+        "train": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                51085,
+                340
+              ]
+            },
+            "label": {
+              "dtype": "float32",
+              "shape": [
+                51085
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                51085
+              ]
+            },
+            "source_id": {
+              "dtype": "<U32",
+              "shape": [
+                51085
+              ]
+            },
+            "split_group": {
+              "dtype": "<U24",
+              "shape": [
+                51085
+              ]
+            }
+          },
+          "bytes": 22514427,
+          "group_set_sha256": "f1b41539c6dcf69d17babff060288321c977833133c4b2071450655edcb23047",
+          "path": "scania_train.npz",
+          "rows": 51085,
+          "sample_id_order_sha256": "a9f2a99fc659331a0f11a837abce074881200ab946e9a5dc3433ccd754d6487d",
+          "sha256": "cadb1774f43af4269899a432dcf1173be4ca7b0bfa35f7c954e6b8cd0bdae8fc"
+        },
+        "val": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                8915,
+                340
+              ]
+            },
+            "label": {
+              "dtype": "float32",
+              "shape": [
+                8915
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                8915
+              ]
+            },
+            "source_id": {
+              "dtype": "<U32",
+              "shape": [
+                8915
+              ]
+            },
+            "split_group": {
+              "dtype": "<U24",
+              "shape": [
+                8915
+              ]
+            }
+          },
+          "bytes": 3940443,
+          "group_set_sha256": "4f9108dce2c2a146119778a466ed036d688d3186f23d0a1ccab88392fdc6a910",
+          "path": "scania_val.npz",
+          "rows": 8915,
+          "sample_id_order_sha256": "a7fb9cb131bbff6c1c23d9f9a5d2123fde8171d8f08d39c915b717a6fd8aeb36",
+          "sha256": "813b252acb3d81411d617c5c8099e3a3d4afc9d584f6484978f7432f7c3028f5"
+        }
+      },
+      "kind": "real Scania heavy-truck operational sensors and counters",
+      "normalization": {
+        "feature_count": 170,
+        "iqr_sha256": "c3850acb888fcffa43a4fd2996ba793f5a88cb5df65994c481151fe1a8212db6",
+        "median_sha256": "9e924d6d8d69639672617d7852f4ef37f58c796498bf7f52d7d0d753b6f2c804",
+        "missing_mask_appended": true
+      },
+      "official_test_held_out": true,
+      "raw_files": [
+        {
+          "bytes": 56618034,
+          "path": "scania/aps_failure_at_scania_trucks.zip",
+          "sha256": "5504d0402f54faaf97ac0ca085a621645763f5cfea2eb29c592b057d43d4db89"
+        }
+      ],
+      "target": "APS component failure versus other failure"
+    },
+    "singapore": {
+      "features": [
+        "first-half trip speed",
+        "engine state",
+        "road grade",
+        "OBD engine load",
+        "OBD mass air flow",
+        "speed-derived acceleration",
+        "sample interval",
+        "observed fraction"
+      ],
+      "files": {
+        "test": {
+          "arrays": {
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                465,
+                64
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                465
+              ]
+            },
+            "sequence": {
+              "dtype": "float32",
+              "shape": [
+                465,
+                64,
+                8
+              ]
+            },
+            "source_id": {
+              "dtype": "<U18",
+              "shape": [
+                465
+              ]
+            },
+            "split_group": {
+              "dtype": "<U1",
+              "shape": [
+                465
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                465,
+                4
+              ]
+            }
+          },
+          "bytes": 264031,
+          "group_set_sha256": "7dc5441c2f4eebca4e7541d4aa0f4be4589cb27e0907e33d7f61b7b9df655ca2",
+          "path": "singapore_test.npz",
+          "rows": 465,
+          "sample_id_order_sha256": "134dfbef6e04392a5f82a2aa2da2bb2853dbe86795205e8ecd724f05594faa69",
+          "sha256": "32ff05c8c19a30931f80ebea054f9514a8c991003deef9974ad1064dca74bb9f"
+        },
+        "train": {
+          "arrays": {
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                1831,
+                64
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                1831
+              ]
+            },
+            "sequence": {
+              "dtype": "float32",
+              "shape": [
+                1831,
+                64,
+                8
+              ]
+            },
+            "source_id": {
+              "dtype": "<U23",
+              "shape": [
+                1831
+              ]
+            },
+            "split_group": {
+              "dtype": "<U1",
+              "shape": [
+                1831
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                1831,
+                4
+              ]
+            }
+          },
+          "bytes": 1462676,
+          "group_set_sha256": "df0db5d9f6d4233cb03c423c9282a9180b88ad58ed58f1050e44a2a67617e802",
+          "path": "singapore_train.npz",
+          "rows": 1831,
+          "sample_id_order_sha256": "2aae4c51b8ed05765b686b00631809336e9eab8829dffbf33ac85cda1bd76d30",
+          "sha256": "676174a43c0a7e6d7b380d23d944a6bcf5170a6207077cd51cdf0e95ed31e79b"
+        },
+        "val": {
+          "arrays": {
+            "mask": {
+              "dtype": "bool",
+              "shape": [
+                126,
+                64
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                126
+              ]
+            },
+            "sequence": {
+              "dtype": "float32",
+              "shape": [
+                126,
+                64,
+                8
+              ]
+            },
+            "source_id": {
+              "dtype": "<U18",
+              "shape": [
+                126
+              ]
+            },
+            "split_group": {
+              "dtype": "<U1",
+              "shape": [
+                126
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                126,
+                4
+              ]
+            }
+          },
+          "bytes": 60537,
+          "group_set_sha256": "61334baed803be687fcea49d5a39632ed2cac06966731d16a22ef4950d53f25b",
+          "path": "singapore_val.npz",
+          "rows": 126,
+          "sample_id_order_sha256": "11f1dc9052a1c3ec141c8bba4c26cb719f3b7950516dc3d3f126ae46dae1feb9",
+          "sha256": "968f7222d2416ffba7f8bbae1c046253a5b936b1112759b61903f6072887cfd4"
+        }
+      },
+      "kind": "real commercial-vehicle OBD observations",
+      "leakage_control": "only the first half of each trip is encoded and the publisher instantaneous fuel stream is excluded",
+      "raw_files": [
+        {
+          "bytes": 184847448,
+          "path": "singapore-commercial-truck/figshare/A_GPS_OBD.csv",
+          "sha256": "11a6c933a004bcba9ccb09fed57c1d4e857e200d8539e60acbcb09e571a5fa77"
+        },
+        {
+          "bytes": 154259,
+          "path": "singapore-commercial-truck/figshare/A_tripFuelUsed.csv",
+          "sha256": "f86bee3a91d32b6a2b2f8b1773371f721c342e8d92c8aae76947fb2fe797bce3"
+        },
+        {
+          "bytes": 992733,
+          "path": "singapore-commercial-truck/figshare/B_GPS_OBD.csv",
+          "sha256": "a7fa2f410d01709935923a58dcdd3ba8fac47d8b7400e5c5d32b727db4e97af9"
+        },
+        {
+          "bytes": 6421,
+          "path": "singapore-commercial-truck/figshare/B_payload.csv",
+          "sha256": "65edeb899a83fcd2f37950e77f51b4fe6d5804e1eae8cfcbd56ad3245c379f3e"
+        },
+        {
+          "bytes": 39911,
+          "path": "singapore-commercial-truck/figshare/B_tripFuelUsed.csv",
+          "sha256": "45764b20ef88dcf0ce4a91e733bfd0f173a2d23243a970c7aff18728c040e70f"
+        },
+        {
+          "bytes": 517460,
+          "path": "singapore-commercial-truck/figshare/C_GPS_OBD.csv",
+          "sha256": "0391549adfbcdf0a25b99f0fdfdce9c7fc9b408acb45326d3c5ba3ecfb880eed"
+        },
+        {
+          "bytes": 7125,
+          "path": "singapore-commercial-truck/figshare/C_payload.csv",
+          "sha256": "6d6c2315ddf6096655d0f09a11fb189b8c63e7b0402d9e0f64cdb472f7c46ef0"
+        },
+        {
+          "bytes": 10474,
+          "path": "singapore-commercial-truck/figshare/C_tripFuelUsed.csv",
+          "sha256": "e8894ce5f74b541c58ea0775b5a6cab1742efa126da41b183de909ff16eef7d3"
+        },
+        {
+          "bytes": 234678,
+          "path": "singapore-commercial-truck/figshare/D_GPS_OBD.csv",
+          "sha256": "e3183a8f9ebb168f294e26cf5bea4aad895d233e3e50f518e89b2f1730806082"
+        },
+        {
+          "bytes": 6409,
+          "path": "singapore-commercial-truck/figshare/D_payload.csv",
+          "sha256": "061814dc31c0a9d4ee4c7085541019c2094ec1b543815cb4713e897b63408695"
+        },
+        {
+          "bytes": 4823,
+          "path": "singapore-commercial-truck/figshare/D_tripFuelUsed.csv",
+          "sha256": "0ae1167b31f8b01b84b0b6c9af6e05b5e49a304f31dce175464b7943970670d8"
+        },
+        {
+          "bytes": 340992,
+          "path": "singapore-commercial-truck/figshare/E_GPS_OBD.csv",
+          "sha256": "b94f7dcf78175338178951208084e12cbc527f59d93dafe2082bc55411b1c2ed"
+        },
+        {
+          "bytes": 10895,
+          "path": "singapore-commercial-truck/figshare/E_tripFuelUsed.csv",
+          "sha256": "322411af76da06b02315d24a08a3a7c70df54e73540e5c8e323d36364922f84c"
+        },
+        {
+          "bytes": 2005026,
+          "path": "singapore-commercial-truck/figshare/F_GPS_OBD.csv",
+          "sha256": "c17c391b83629bce32318707015cdc8e0c99ea28279c6fe7bea273361666d8a7"
+        },
+        {
+          "bytes": 28604,
+          "path": "singapore-commercial-truck/figshare/F_tripFuelUsed.csv",
+          "sha256": "142f4f6a92627f7af1009080c638fe9f9273a2334225813b373c0194ad8b4640"
+        },
+        {
+          "bytes": 1105114,
+          "path": "singapore-commercial-truck/figshare/G_GPS_OBD.csv",
+          "sha256": "a0a8c1b673bcf43751659b01695ca50e27af18b6d55e1f755b7a73f9d6fc89d4"
+        },
+        {
+          "bytes": 1130,
+          "path": "singapore-commercial-truck/figshare/G_payload.csv",
+          "sha256": "153ae26d0ab5471070e63a47d1fe6e5422401cae941cebace2e775524b6e07ce"
+        },
+        {
+          "bytes": 14204,
+          "path": "singapore-commercial-truck/figshare/G_tripFuelUsed.csv",
+          "sha256": "4ae4c3463e9b68f4a08dceca29ab4c51362fcdc6c03729d102d91ed1e188a4b8"
+        },
+        {
+          "bytes": 50375,
+          "path": "singapore-commercial-truck/figshare/H_GPS_OBD.csv",
+          "sha256": "6a7d44e9181bfd6cd8a7c341abc1f70eede44a37e5595fe28bb1427829479676"
+        },
+        {
+          "bytes": 859,
+          "path": "singapore-commercial-truck/figshare/H_tripFuelUsed.csv",
+          "sha256": "22b2cd46da90aa317bc1472f246f48c7603f705d8a3af31dd0ea9320a7096539"
+        },
+        {
+          "bytes": 3185845,
+          "path": "singapore-commercial-truck/figshare/I_GPS_OBD.csv",
+          "sha256": "cb93bf56775a35116e3a2d98451926a2a5e313560a7eb16b5b1809761f57eaf6"
+        },
+        {
+          "bytes": 4210,
+          "path": "singapore-commercial-truck/figshare/I_payload.csv",
+          "sha256": "11d95921f9429dfccbf735b89c88cf9cfc91417c768e5b7a55a62af86a70b5cc"
+        },
+        {
+          "bytes": 71470,
+          "path": "singapore-commercial-truck/figshare/I_tripFuelUsed.csv",
+          "sha256": "6d24968bacae6f22cc4400f9cd675db1b83e81f5978a85bb469358e9917188dc"
+        },
+        {
+          "bytes": 324287,
+          "path": "singapore-commercial-truck/figshare/J_GPS_OBD.csv",
+          "sha256": "c20a2b4671f252d1180fec2a6b9e32740cc299207d944633193773fb686976aa"
+        },
+        {
+          "bytes": 1611,
+          "path": "singapore-commercial-truck/figshare/J_payload.csv",
+          "sha256": "b14bebd9b588f8df29f277c833a358d084602e579a60a942922c11df4109f926"
+        },
+        {
+          "bytes": 5972,
+          "path": "singapore-commercial-truck/figshare/J_tripFuelUsed.csv",
+          "sha256": "fad59594336ef0709ae9a75a3f0012f2a4e94361dc6d4b15d3f4e980a97e9b64"
+        }
+      ],
+      "targets": [
+        "full-trip published OBD fuel",
+        "full-trip timestamp-derived duration",
+        "load unavailable",
+        "future-half idle-heavy label"
+      ],
+      "trip_counts": {
+        "test": 465,
+        "train": 1831,
+        "val": 126
+      },
+      "vehicle_disjoint": true
+    },
+    "tlc": {
+      "chronological_split": "days 1-20 train, 21-25 validation, 26-31 final",
+      "features": [
+        "log distance",
+        "log duration",
+        "average speed",
+        "passenger count",
+        "source-field missing fraction",
+        "rate code",
+        "pickup zone",
+        "dropoff zone",
+        "time-of-day sine/cosine",
+        "day-of-week sine/cosine"
+      ],
+      "files": {
+        "final": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                20000,
+                12
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                20000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U24",
+              "shape": [
+                20000
+              ]
+            },
+            "split_group": {
+              "dtype": "<U10",
+              "shape": [
+                20000
+              ]
+            },
+            "target": {
+              "dtype": "float32",
+              "shape": [
+                20000
+              ]
+            }
+          },
+          "bytes": 823740,
+          "group_set_sha256": "7a2c37861566208d5cf34deca689386074b3a24821bf89bde35cda466401d28b",
+          "path": "tlc_final.npz",
+          "rows": 20000,
+          "sample_id_order_sha256": "df5e7972597b0ff2b8388c45508ca81e90f56b711c873d34b759d427f80436a2",
+          "sha256": "427fa318a957ba83265a304d170c70bd642b202aa5f97df098470239e33be53c"
+        },
+        "train": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                100000,
+                12
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                100000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U24",
+              "shape": [
+                100000
+              ]
+            },
+            "split_group": {
+              "dtype": "<U10",
+              "shape": [
+                100000
+              ]
+            },
+            "target": {
+              "dtype": "float32",
+              "shape": [
+                100000
+              ]
+            }
+          },
+          "bytes": 4054065,
+          "group_set_sha256": "22bd88bb1c2816493d4f65c0a2bddeb95bcce5a00fbeb03b0279dd9429264730",
+          "path": "tlc_train.npz",
+          "rows": 100000,
+          "sample_id_order_sha256": "a4ed0753d1c7208b15abb4ff638f9e8d3d6c03b9699ad0b3049cafcbf55e218c",
+          "sha256": "5e059bf11551e96dd4154caceba363a945b6ed1dcf08d53bac6714de5c46761d"
+        },
+        "val": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                20000,
+                12
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                20000
+              ]
+            },
+            "source_id": {
+              "dtype": "<U24",
+              "shape": [
+                20000
+              ]
+            },
+            "split_group": {
+              "dtype": "<U10",
+              "shape": [
+                20000
+              ]
+            },
+            "target": {
+              "dtype": "float32",
+              "shape": [
+                20000
+              ]
+            }
+          },
+          "bytes": 817853,
+          "group_set_sha256": "e6d1257bc04a1116fd63d8b68ab1a4f11c4ace6f617a9dc7af3dbeb4eb3f599d",
+          "path": "tlc_val.npz",
+          "rows": 20000,
+          "sample_id_order_sha256": "b79f6ba4a5ca512463917e8111df06c4df091e3001fe413c3b24789a2287f593",
+          "sha256": "ea36397d4ad1836827175c28164bfc0452bd0dfa1460c143ff9313061625bac8"
+        }
+      },
+      "kind": "real vendor-submitted metered passenger trips; cost-domain proxy only",
+      "raw_files": [
+        {
+          "bytes": 49961641,
+          "path": "tlc/yellow_tripdata_2024-01.parquet",
+          "sha256": "c4d59da7bbc8abaeeeb1727947ee93d9891a71acb42854bd80db1571b2030510"
+        }
+      ],
+      "target": "log1p observed fare_amount"
+    },
+    "vius": {
+      "files": {
+        "test": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                3335,
+                24
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                3335
+              ]
+            },
+            "source_id": {
+              "dtype": "<U32",
+              "shape": [
+                3335
+              ]
+            },
+            "split_group": {
+              "dtype": "<U4",
+              "shape": [
+                3335
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                3335,
+                3
+              ]
+            }
+          },
+          "bytes": 140047,
+          "group_set_sha256": "8e64f53acb771fad05f1bd9d06d4dab6df15d39197e99d29c24179adac1a313a",
+          "path": "vius_test.npz",
+          "rows": 3335,
+          "sample_id_order_sha256": "489be255de5af7f4afc7d5197fc1727c5c0d460a37418030799fa032c00b9b6e",
+          "sha256": "f20467495a77f3bc7c2f4f8bcdecaad2e6da34525bd587dd58a93a348a56c4ef"
+        },
+        "train": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                17340,
+                24
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                17340
+              ]
+            },
+            "source_id": {
+              "dtype": "<U32",
+              "shape": [
+                17340
+              ]
+            },
+            "split_group": {
+              "dtype": "<U4",
+              "shape": [
+                17340
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                17340,
+                3
+              ]
+            }
+          },
+          "bytes": 724076,
+          "group_set_sha256": "9c4a9e37e3fc36368a8da055f5d6ac67e864c6691390f5c955df9ae140017854",
+          "path": "vius_train.npz",
+          "rows": 17340,
+          "sample_id_order_sha256": "33898986319902b10af8199a4f52d3c3e3025bd1244ebf875428ef8b22249bf1",
+          "sha256": "1b465a36bb1bfd25d009a8b56aa9d5b5c04ed64381c3a83f6de736d050584bfe"
+        },
+        "val": {
+          "arrays": {
+            "features": {
+              "dtype": "float32",
+              "shape": [
+                4073,
+                24
+              ]
+            },
+            "sample_id": {
+              "dtype": "<U24",
+              "shape": [
+                4073
+              ]
+            },
+            "source_id": {
+              "dtype": "<U32",
+              "shape": [
+                4073
+              ]
+            },
+            "split_group": {
+              "dtype": "<U4",
+              "shape": [
+                4073
+              ]
+            },
+            "targets": {
+              "dtype": "float32",
+              "shape": [
+                4073,
+                3
+              ]
+            }
+          },
+          "bytes": 170976,
+          "group_set_sha256": "d2d028adba61469edc38e1b50be28ff17bb04ebd503a968edea65db98718485b",
+          "path": "vius_val.npz",
+          "rows": 4073,
+          "sample_id_order_sha256": "a0d80cdb86f05e46bb10f0a8e20862cc5306a80b4fbd84606ec7ec18ba7a953e",
+          "sha256": "97cecf29ed4ea6fb208f122a829667521b397de4f490390f25ee8e4723eca283"
+        }
+      },
+      "kind": "real public-use truck survey records",
+      "normalization": {
+        "columns": [
+          "AVGWEIGHT",
+          "GVWR_CLASS",
+          "MPG",
+          "MILESANNL",
+          "MILESLIFE",
+          "MONTHOPERATE",
+          "TOWCAPACITY",
+          "WEIGHOUTPCT",
+          "RO_0_50",
+          "RO_51_100",
+          "RO_201_500",
+          "RO_GT500"
+        ],
+        "iqr": [
+          6.0,
+          2.0,
+          4.0,
+          37003.5,
+          359235.5,
+          1.0,
+          2.0,
+          50.0,
+          90.0,
+          25.0,
+          1.0,
+          1.0
+        ],
+        "median": [
+          10.0,
+          8.0,
+          7.0,
+          15562.0,
+          217506.0,
+          1.0,
+          4.0,
+          20.0,
+          75.0,
+          5.0,
+          0.0,
+          0.0
+        ],
+        "missing_mask_appended": true
+      },
+      "raw_files": [
+        {
+          "bytes": 3528049,
+          "path": "vius/vius_2021_puf_csv.zip",
+          "sha256": "25261e9188c0d69d9e0774d6d06c9314b2b83de14d95865f3c9d2c71472b479b"
+        }
+      ],
+      "state_disjoint": true,
+      "targets": [
+        "annual DEADHEADPCT",
+        "annual REPOSITIONPCT",
+        "annual LOADEDPCT"
+      ]
+    }
+  }
+}

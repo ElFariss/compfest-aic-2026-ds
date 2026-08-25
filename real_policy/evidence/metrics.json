@@ -1,0 +1,111 @@
+{
+  "artifact": {
+    "max_abs_parity_difference": 0.0,
+    "path": "real_backhaul_policy_frozen.pt",
+    "sha256": "11cb3412afc970a6c8c2a26a8d7f0a07ba2da6ff16c8c6c54d1b8375acd1a1f5",
+    "size_bytes": 13695583
+  },
+  "claim_boundary": "component-level capped real-public-data validation; no Haulio operational uplift claim",
+  "completed_steps": 1100,
+  "final_evaluation": {
+    "batch_size": 192,
+    "max_batches_per_source": 24,
+    "ordering": "first N rows of each immutable deterministically ordered held-out split",
+    "reason": "deadline-bounded competition release; examples field records the exact evaluated count"
+  },
+  "final_held_out": {
+    "amazon": {
+      "examples": 4608.0,
+      "hard_constraint_violations": 0.0,
+      "nearest_neighbor_top1": 0.6204426884651184,
+      "next_stop_top1": 0.693359375,
+      "next_stop_top3": 0.9134114384651184
+    },
+    "dtcargo": {
+      "duration_mae_canonical": 0.62558513879776,
+      "examples": 4608.0,
+      "home_base_average_precision": 0.7092319876480204,
+      "long_haul_average_precision": 0.15921074175473018,
+      "signal_mae_canonical": 0.3390711843967438
+    },
+    "health": {
+      "aps_failure_average_precision": 0.7474066878846607,
+      "aps_failure_recall_at_0_5": 0.9298245614035088,
+      "examples": 4608.0
+    },
+    "lade": {
+      "eta_mae_canonical": 0.5749178528785706,
+      "examples": 4608.0,
+      "hard_constraint_violations": 0.0,
+      "nearest_neighbor_top1": 0.3157552182674408,
+      "next_stop_top1": 0.4364149272441864,
+      "next_stop_top3": 0.7352430820465088
+    },
+    "price": {
+      "examples": 4608.0,
+      "price_mae_canonical": 0.060631684958934784
+    },
+    "telemetry": {
+      "duration_mae_canonical": 0.6216650605201721,
+      "examples": 465.0,
+      "fuel_mae_canonical": 0.4341716468334198,
+      "idle_average_precision": 0.49185748511749966
+    },
+    "vius": {
+      "deadhead_mae_canonical": 0.17280864715576172,
+      "examples": 3335.0,
+      "loaded_mae_canonical": 0.18811067938804626,
+      "reposition_mae_canonical": 0.16244590282440186
+    }
+  },
+  "selection": {
+    "best_step": 800,
+    "validation_objective": 0.7222377847415355
+  },
+  "validation": {
+    "amazon": {
+      "examples": 4608.0,
+      "hard_constraint_violations": 0.0,
+      "nearest_neighbor_top1": 0.6117621660232544,
+      "next_stop_top1": 0.6818576455116272,
+      "next_stop_top3": 0.9010416865348816
+    },
+    "dtcargo": {
+      "duration_mae_canonical": 0.7823966145515442,
+      "examples": 4608.0,
+      "home_base_average_precision": 0.9035728084096328,
+      "long_haul_average_precision": 0.13380224842022587,
+      "signal_mae_canonical": 0.0460088886320591
+    },
+    "health": {
+      "aps_failure_average_precision": 0.7031437418975408,
+      "aps_failure_recall_at_0_5": 0.9012345679012346,
+      "examples": 4608.0
+    },
+    "lade": {
+      "eta_mae_canonical": 0.562509298324585,
+      "examples": 4608.0,
+      "hard_constraint_violations": 0.0,
+      "nearest_neighbor_top1": 0.3315972089767456,
+      "next_stop_top1": 0.4626736044883728,
+      "next_stop_top3": 0.7510850429534912
+    },
+    "price": {
+      "examples": 4608.0,
+      "price_mae_canonical": 0.05869621783494949
+    },
+    "telemetry": {
+      "duration_mae_canonical": 0.6987127065658569,
+      "examples": 126.0,
+      "fuel_mae_canonical": 0.5424270033836365,
+      "idle_average_precision": 0.8187349913153296
+    },
+    "vius": {
+      "deadhead_mae_canonical": 0.17330993711948395,
+      "examples": 4073.0,
+      "loaded_mae_canonical": 0.18123601377010345,
+      "reposition_mae_canonical": 0.17112357914447784
+    }
+  },
+  "wall_seconds": 2433.1051478385925
+}

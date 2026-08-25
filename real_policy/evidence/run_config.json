@@ -1,0 +1,66 @@
+{
+  "arguments": {
+    "batch_size": 192,
+    "d_model": 160,
+    "data": "$REAL_DATA_ROOT",
+    "eval_batches": 24,
+    "eval_every": 400,
+    "graph_layers": 4,
+    "learning_rate": 0.0003,
+    "max_hours": 0.18,
+    "output": "real_policy/artifacts",
+    "patience": 10,
+    "seed": 20260825,
+    "steps": 3000,
+    "temporal_layers": 3,
+    "weight_decay": 0.01
+  },
+  "contains_synthetic": false,
+  "cross_dataset_rows_joined": false,
+  "cuda": "11.6",
+  "data_manifest_sha256": "8abc474b2e87088ac8384fa2102dc06944ff9331ea88e8276c20a723f55deb33",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "model_config": {
+    "context_dim": 16,
+    "d_model": 160,
+    "dropout": 0.08,
+    "dtcargo_dim": 16,
+    "graph_layers": 4,
+    "heads": 8,
+    "health_dim": 340,
+    "max_candidates": 32,
+    "node_dim": 16,
+    "price_dim": 12,
+    "telemetry_dim": 8,
+    "telemetry_steps": 64,
+    "temporal_layers": 3,
+    "vius_dim": 24
+  },
+  "parameters": 3407060,
+  "pretrained_weights": false,
+  "python": "3.10.4",
+  "random_initialization": true,
+  "seed": 20260825,
+  "split_sizes": {
+    "train": {
+      "amazon": 60000,
+      "dtcargo": 71120,
+      "health": 51085,
+      "lade": 60000,
+      "price": 100000,
+      "telemetry": 1831,
+      "vius": 17340
+    },
+    "validation": {
+      "amazon": 10000,
+      "dtcargo": 14370,
+      "health": 8915,
+      "lade": 10000,
+      "price": 20000,
+      "telemetry": 126,
+      "vius": 4073
+    }
+  },
+  "started_unix": 1787643057.4582598,
+  "torch": "1.13.1+cu116"
+}

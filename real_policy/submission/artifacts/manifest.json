@@ -1,0 +1,108 @@
+{
+  "artifact": {
+    "max_abs_parity_difference": 0.0,
+    "path": "real_backhaul_policy_frozen.pt",
+    "sha256": "11cb3412afc970a6c8c2a26a8d7f0a07ba2da6ff16c8c6c54d1b8375acd1a1f5",
+    "size_bytes": 13695583
+  },
+  "contains_synthetic": false,
+  "cross_dataset_rows_joined": false,
+  "data_manifest_sha256": "8abc474b2e87088ac8384fa2102dc06944ff9331ea88e8276c20a723f55deb33",
+  "dispatcher_approval_required": true,
+  "model": "RealBackhaulNet",
+  "model_config": {
+    "context_dim": 16,
+    "d_model": 160,
+    "dropout": 0.08,
+    "dtcargo_dim": 16,
+    "graph_layers": 4,
+    "heads": 8,
+    "health_dim": 340,
+    "max_candidates": 32,
+    "node_dim": 16,
+    "price_dim": 12,
+    "telemetry_dim": 8,
+    "telemetry_steps": 64,
+    "temporal_layers": 3,
+    "vius_dim": 24
+  },
+  "official_final_opened_after_freeze": true,
+  "output_schema": {
+    "dtcargo": "log1p duration, signal ratio, home and long-haul logits",
+    "health": "APS failure logit",
+    "price": "log1p NYC metered fare quantiles",
+    "route_eta": "source-domain canonical hours",
+    "telemetry": "first-half-prefix forecast of full-trip log1p fuel/duration, unavailable load, future idle-heavy logit",
+    "vius": "annual fractions"
+  },
+  "parameter_count": 3407060,
+  "preprocessing": {
+    "dtcargo": {
+      "feature_schema": "dtcargo-summary-8-values-plus-mask.v1"
+    },
+    "health": {
+      "feature_count": 170,
+      "iqr_sha256": "c3850acb888fcffa43a4fd2996ba793f5a88cb5df65994c481151fe1a8212db6",
+      "median_sha256": "9e924d6d8d69639672617d7852f4ef37f58c796498bf7f52d7d0d753b6f2c804",
+      "missing_mask_appended": true
+    },
+    "price": {
+      "feature_schema": "nyc-tlc-logfare-12.v1"
+    },
+    "route": {
+      "candidate_selection": "nearest published or road-derived distance without target access",
+      "feature_schema": "real-route-canonical-16.v1"
+    },
+    "telemetry": {
+      "feature_schema": "singapore-obd-canonical-8.v1"
+    },
+    "vius": {
+      "columns": [
+        "AVGWEIGHT",
+        "GVWR_CLASS",
+        "MPG",
+        "MILESANNL",
+        "MILESLIFE",
+        "MONTHOPERATE",
+        "TOWCAPACITY",
+        "WEIGHOUTPCT",
+        "RO_0_50",
+        "RO_51_100",
+        "RO_201_500",
+        "RO_GT500"
+      ],
+      "iqr": [
+        6.0,
+        2.0,
+        4.0,
+        37003.5,
+        359235.5,
+        1.0,
+        2.0,
+        50.0,
+        90.0,
+        25.0,
+        1.0,
+        1.0
+      ],
+      "median": [
+        10.0,
+        8.0,
+        7.0,
+        15562.0,
+        217506.0,
+        1.0,
+        4.0,
+        20.0,
+        75.0,
+        5.0,
+        0.0,
+        0.0
+      ],
+      "missing_mask_appended": true
+    }
+  },
+  "pretrained_weights": false,
+  "random_initialization": true,
+  "runtime_auto_update": false
+}

@@ -1,0 +1,145 @@
+lock_version: "1"
+verified_utc: "2026-08-25T00:00:00Z"
+notes:
+  - "A null digest is not a cryptographic verification. Use the pinned provider revision, object manifest, or expected byte count shown below."
+  - "After first acquisition, record locally computed SHA-256 values in an evidence manifest without replacing these provider identifiers."
+
+artifacts:
+  singapore_commercial_vehicle:
+    artifact_id: "figshare:24337976"
+    filename: "singapore-commercial-vehicle/figshare_TRR.zip"
+    expected_bytes: 46804275
+    sha256: "dd6587b8d7c568ec08320449dd14305bfc29e52a20baf8876ed9a8a60f121560"
+    provider_md5: "ac872cf3e3bf6a0aa163250ed166ac42"
+    verification: "downloaded_and_hashed_2026-08-25"
+
+  dt_cargo_v2:
+    artifact_id: "github:TUMFTM/dt-cargo@805c534c73ed4d247babd053f60468b486f92519:input/public"
+    filename: "dt-cargo/"
+    expected_bytes: 16423511
+    sha256: null
+    provider_md5: null
+    pinned_revision: "805c534c73ed4d247babd053f60468b486f92519"
+    files:
+      - filename: "dt-cargo/fleet.csv"
+        expected_bytes: 1130
+        sha256: "ef21179d2b383044046bd6e226f43daa6c09a330e81bb5192bc6b0b68d3e1bd0"
+      - filename: "dt-cargo/tracks.csv"
+        expected_bytes: 16381647
+        sha256: "93843c433deb3f3347cb261a7458cdba827b96225f828413f3aa1b42489af548"
+      - filename: "dt-cargo/speed.zip"
+        expected_bytes: 40734
+        sha256: "91942c997045fbeded961e272b32cf78cfba9571c4ea7ac34e86d77bf315f9a6"
+    verification: "downloaded_from_pinned_official_GitHub_revision_and_hashed_2026-08-25"
+
+  vius_2021_puf:
+    artifact_id: "census:vius:2021:puf_csv"
+    filename: "vius-2021/vius_2021_puf_csv.zip"
+    expected_bytes: 3528049
+    sha256: "25261e9188c0d69d9e0774d6d06c9314b2b83de14d95865f3c9d2c71472b479b"
+    provider_md5: null
+    verification: "downloaded_and_hashed_2026-08-25"
+
+  scania_aps_failure:
+    artifact_id: "uci:421:aps-failure-at-scania-trucks"
+    filename: "scania-aps/aps+failure+at+scania+trucks.zip"
+    expected_bytes: 56618034
+    sha256: "5504d0402f54faaf97ac0ca085a621645763f5cfea2eb29c592b057d43d4db89"
+    provider_md5: null
+    verification: "downloaded_from_official_UCI_URL_and_hashed_2026-08-25"
+    license_notice: "UCI landing page CC BY 4.0; exact official ZIP also embeds a Scania GPLv3 notice"
+
+  cfs_2022_pums:
+    artifact_id: "census:cfs:2022:pums"
+    filename: "cfs-2022/cfs_2022_pums.zip"
+    expected_bytes: 677530696
+    sha256: null
+    provider_md5: null
+    verification: "official_URL_and_content_length_only; compute_SHA256_after_download"
+
+  amazon_last_mile_2021:
+    artifact_id: "aws-open-data:amazon-last-mile-challenges:almrrc2021"
+    filename: "amazon/"
+    expected_bytes: 672679067
+    sha256: null
+    provider_md5: null
+    provider_manifest: "s3://amazon-last-mile-challenges/almrrc2021/"
+    update_frequency: "none"
+    files:
+      - filename: "amazon/train/route_data.json"
+        expected_bytes: 78972162
+        sha256: "da3a5d4e73b683d756111f0d9e6d3f20eb8e82adf7c89ee6ee0cb2239abd2f38"
+      - filename: "amazon/train/package_data.json"
+        expected_bytes: 375437806
+        sha256: "9ac858358e9f43d34cb65198c03601c814328a06dec9b71ee88b40aaec7f0966"
+      - filename: "amazon/train/actual_sequences.json"
+        expected_bytes: 9665078
+        sha256: "3de44067242e8fa841d4b852db8809afaa23fe852e452ee4a2f54f0f0fb77e3c"
+      - filename: "amazon/eval/route_data.json"
+        expected_bytes: 37777768
+        sha256: "dfd8a198b9df5e3b194d3a268f6f442edcd77f028870d54a8d7397a7bc366466"
+      - filename: "amazon/eval/package_data.json"
+        expected_bytes: 166201035
+        sha256: "612f9aae67df34e637b106a6e2b1cd627fee11fdc0107937bdb56f8c61ec7848"
+      - filename: "amazon/eval/actual_sequences.json"
+        expected_bytes: 4625218
+        sha256: "30e924b5f263bd5e0a4bb58a756c8f6767b49d59a6bfa718ce26d2767a2c90e9"
+    verification: "downloaded_from_fixed_AWS_Open_Data_objects_and_hashed_2026-08-25"
+
+  lade:
+    artifact_id: "huggingface:Cainiao-AI/LaDe@be2cec02775cafc8d52230303f32134382bcc50b"
+    filename: "lade/"
+    expected_bytes: null
+    sha256: null
+    provider_md5: null
+    pinned_revision: "be2cec02775cafc8d52230303f32134382bcc50b"
+    verification: "immutable_Hugging_Face_git_revision"
+
+  athens_pharmaceutical_3pl:
+    artifact_id: "zenodo:15310106:data.zip"
+    filename: "athens/data.zip"
+    expected_bytes: 2926700
+    sha256: "f28906181e925fa1697b069febff350a331ee8cd73d99cd678de661a350a5005"
+    provider_md5: "0daa54c790e7c562665093de95ff1dec"
+    verification: "downloaded_from_immutable_Zenodo_record_and_hashed_2026-08-25"
+
+  road_can_ids:
+    artifact_id: "zenodo:10462796:road.zip"
+    filename: "road-can-ids/road.zip"
+    expected_bytes: null
+    sha256: null
+    provider_md5: "cab184cfc2fe12c0834bc46188c0f330"
+    verification: "provider_published_md5"
+
+  route_deviation_mendeley:
+    artifact_id: "mendeley:kkwgfvmtxn:1:388ea249-0830-4906-a39e-7bcbd5ee837a"
+    filename: "route-deviation/routes_performance.xlsx"
+    expected_bytes: 19713337
+    sha256: "8f17d15e189c99a34f2446daeaaf1a65d1e79045a94c4d3c452391c96d9cee00"
+    provider_md5: null
+    verification: "provider_published_SHA256"
+
+  olist_brazilian_ecommerce:
+    artifact_id: "kaggle:olistbr/brazilian-ecommerce:version-2"
+    filename: "olist/"
+    expected_bytes: null
+    sha256: null
+    provider_md5: null
+    verification: "Kaggle_dataset_version; capture_API_manifest_and_license_after_authenticated_download"
+
+  nyc_tlc_yellow_2024_01:
+    artifact_id: "nyc-tlc:yellow:2024-01"
+    filename: "nyc-tlc/yellow_tripdata_2024-01.parquet"
+    expected_bytes: 49961641
+    sha256: "c4d59da7bbc8abaeeeb1727947ee93d9891a71acb42854bd80db1571b2030510"
+    provider_md5: null
+    verification: "downloaded_from_official_TLC_object_and_hashed_2026-08-25"
+
+  osm_indonesia:
+    artifact_id: "geofabrik:asia:indonesia-latest"
+    filename: "osm-indonesia/indonesia-latest.osm.pbf"
+    expected_bytes: null
+    sha256: null
+    provider_md5: null
+    provider_checksum_url: "https://download.geofabrik.de/asia/indonesia-latest.osm.pbf.md5"
+    verification: "verify_the_provider_MD5_sidecar_at_download_time; latest_is_mutable"

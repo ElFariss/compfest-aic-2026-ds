@@ -1,0 +1,34 @@
+{
+  "_provenance": {
+    "public_source": "dtcargo",
+    "raw_artifacts": [
+      {
+        "bytes": 1130,
+        "path": "dt-cargo/input/public/fleet.csv",
+        "sha256": "ef21179d2b383044046bd6e226f43daa6c09a330e81bb5192bc6b0b68d3e1bd0"
+      },
+      {
+        "bytes": 16381647,
+        "path": "dt-cargo/input/public/tracks.csv",
+        "sha256": "93843c433deb3f3347cb261a7458cdba827b96225f828413f3aa1b42489af548"
+      }
+    ],
+    "sample_id": "c8b6bceabc289a71ea2f7473",
+    "source_id": "track=12977;vehicle=7",
+    "split": "test",
+    "transform": "same-source semantic fields from one held-out track and fleet row; UTC timestamp serialized at microsecond precision"
+  },
+  "request_id": "c8b6bceabc289a71ea2f7473",
+  "schema_version": "haulio.real-policy.truck-track.v1",
+  "track": {
+    "avg_hdop": 2.85623,
+    "avg_speed_m_s": 3.01,
+    "axle_class": 98.0,
+    "distance_m": 29.0,
+    "gcwr_kg": 40000.0,
+    "gvwr_kg": 18000.0,
+    "max_speed_m_s": 0.18,
+    "start_time_utc": "2021-09-07T15:55:33.886000Z",
+    "track_gap_m": null
+  }
+}

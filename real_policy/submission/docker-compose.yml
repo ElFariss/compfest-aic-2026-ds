@@ -1,0 +1,26 @@
+services:
+  real-policy:
+    build: .
+    ports:
+      - "127.0.0.1:8088:8088"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 128
+    mem_limit: 4g
+    cpus: 2.0
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import json,urllib.request; assert json.load(urllib.request.urlopen('http://127.0.0.1:8088/health',timeout=3))['status']=='ready'"
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
